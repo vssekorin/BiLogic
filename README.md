@@ -98,6 +98,12 @@ while var1 or var2
 end while
 ```
 
+## Comment
+
+```
+-- Text
+```
+
 ## License (MIT)
 
 MIT License
