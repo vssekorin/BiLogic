@@ -1,6 +1,7 @@
 **BiLogic** is programming language for JVM. All variables are boolean.
 
 ##Assignment
+
 Operations:
 - `not`
 - `or`
@@ -26,7 +27,9 @@ result is var1 and var2 or not var3
 ```
 var1, var2 is expression
 ```
+
 ##Input
+
 ```
 Input := in <VarList>
 ```
@@ -37,7 +40,9 @@ in var
 ```
 in var1, var2, var3
 ```
+
 ##Output
+
 Start with `out`. Examples:
 ```
 out {var}
@@ -53,7 +58,9 @@ And you can use expressions inside braces:
 ```
 out Result: {var1 or not var2 -> var3}. I hope.
 ```
+
 ##If
+
 ```
 IfStatement :=
 if <Expression> then
@@ -74,6 +81,7 @@ end if
 ```
 
 ##While
+
 ```
 While :=
 while <Expression> do
@@ -91,6 +99,7 @@ end while
 ```
 
 ##License (MIT)
+
 MIT License
 
 Copyright (c) 2017 Vseslav Sekorin (vssekorin.com)
