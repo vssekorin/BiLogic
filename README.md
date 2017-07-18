@@ -98,6 +98,15 @@ while var1 or var2
 end while
 ```
 
+## Exception
+
+```
+panic
+```
+```
+panic Message
+```
+
 ## Comment
 
 ```

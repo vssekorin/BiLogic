@@ -8,7 +8,7 @@ else
 end if
 
 -- Output
-out res
+out res - {res}
 
 var1 is true
 var2 is true
@@ -19,3 +19,9 @@ out 1 = {var1}, 2 = {var3}, 3 = {var1 and var2 and var3 and var4}, 4 = {var1 and
 
 result is var1 or var2 and var3 -> not var4
 out Result: {result}. I hope...
+
+in first, second
+
+out {first}, {second}
+
+panic TEXT
