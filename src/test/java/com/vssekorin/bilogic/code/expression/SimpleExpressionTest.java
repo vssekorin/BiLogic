@@ -13,7 +13,7 @@ import org.junit.Test;
 import static jdk.internal.org.objectweb.asm.Opcodes.ICONST_0;
 import static jdk.internal.org.objectweb.asm.Opcodes.ICONST_1;
 import static jdk.internal.org.objectweb.asm.Opcodes.ILOAD;
-import static junit.framework.TestCase.assertEquals;
+import static org.junit.Assert.assertEquals;
 
 /**
  * Test case for {@link SimpleExpression}.
@@ -22,7 +22,7 @@ import static junit.framework.TestCase.assertEquals;
  * @version $Id$
  * @since 1.0
  */
-public class SimpleExpressionTest {
+public final class SimpleExpressionTest {
 
     @Test
     public void asBytecodeTrue() throws Exception {

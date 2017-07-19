@@ -8,7 +8,7 @@ package com.vssekorin.bilogic.util;
 import lombok.val;
 import org.junit.Test;
 
-import static junit.framework.TestCase.assertEquals;
+import static org.junit.Assert.assertEquals;
 
 /**
  * Test case for {@link Pair}.
@@ -17,7 +17,7 @@ import static junit.framework.TestCase.assertEquals;
  * @version $Id$
  * @since 1.0
  */
-public class PairTest {
+public final class PairTest {
 
     @Test
     public void first() throws Exception {
