@@ -27,7 +27,7 @@ public final class Main {
      */
     @SneakyThrows
     public static void main(String[] args) {
-        Files.walk(Paths.get("."))
+        Files.walk(Paths.get(args[0]))
             .parallel()
             .filter(Files::isRegularFile)
             .filter(item -> item.toString().endsWith(".bilog"))

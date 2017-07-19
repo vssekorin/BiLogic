@@ -29,6 +29,11 @@ public final class CustomObject {
      */
     private final String className;
 
+    /**
+     * Create bytecode for SomeObject::new without initialization.
+     *
+     * @return Code
+     */
     public InsnList codeNew() {
         val code = new InsnList();
         code.add(new TypeInsnNode(NEW, this.className));
@@ -36,6 +41,12 @@ public final class CustomObject {
         return code;
     }
 
+    /**
+     * Create bytecode for initialization object.
+     *
+     * @param types Type
+     * @return Code
+     */
     public InsnList codeInit(final String types) {
         val code = new InsnList();
         code.add(new MethodInsnNode(
@@ -48,6 +59,13 @@ public final class CustomObject {
         return code;
     }
 
+    /**
+     * Create bytecode for method.
+     *
+     * @param method Method name
+     * @param types Type
+     * @return Code
+     */
     public InsnList codeMethod(final String method, final String types) {
         val code = new InsnList();
         code.add(new MethodInsnNode(
