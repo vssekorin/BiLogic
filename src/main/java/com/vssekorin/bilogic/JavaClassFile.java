@@ -16,6 +16,7 @@ import lombok.SneakyThrows;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.Optional;
 
 import static jdk.internal.org.objectweb.asm.Opcodes.*;
 
@@ -87,10 +88,11 @@ public final class JavaClassFile implements JavaClass {
      * @return Filename
      */
     private String name() {
-        return this.path
-            .getFileName()
-            .toString()
-            .replace(".bilog", "");
+        return Optional.ofNullable(this.path)
+            .map(Path::getFileName)
+            .map(Path::toString)
+            .map(item -> item.replace(".bilog", ""))
+            .orElseThrow(IllegalArgumentException::new);
     }
 
     /**

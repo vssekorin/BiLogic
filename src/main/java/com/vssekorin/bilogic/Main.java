@@ -6,6 +6,8 @@
 package com.vssekorin.bilogic;
 
 import com.vssekorin.bilogic.code.BLCodeFile;
+import lombok.AccessLevel;
+import lombok.NoArgsConstructor;
 import lombok.SneakyThrows;
 
 import java.nio.file.Files;
@@ -26,7 +28,7 @@ public final class Main {
      * @param args Command line arguments
      */
     @SneakyThrows
-    public static void main(String[] args) {
+    public static void main(final String[] args) {
         Files.walk(Paths.get(args[0]))
             .parallel()
             .filter(Files::isRegularFile)

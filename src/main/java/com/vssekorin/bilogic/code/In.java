@@ -43,7 +43,7 @@ public final class In implements Code {
         code.add(new VarInsnNode(ASTORE, 1));
         val vars = this.line.replace("in", "").trim();
         val varsIndex = new VarList(vars).asIndexList();
-        for(int index : varsIndex) {
+        for (int index : varsIndex) {
             code.add(new VarInsnNode(ALOAD, 1));
             code.add(scanner.codeMethod("nextBoolean", "()Z"));
             code.add(new VarInsnNode(ISTORE, index));

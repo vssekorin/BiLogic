@@ -22,12 +22,12 @@ public final class PairTest {
     @Test
     public void first() throws Exception {
         val pair = new Pair<Integer>(3, 6);
-        assertEquals(pair.first(), new Integer(3));
+        assertEquals(pair.first(), Integer.valueOf(3));
     }
 
     @Test
     public void second() throws Exception {
         val pair = new Pair<Integer>(3, 6);
-        assertEquals(pair.second(), new Integer(6));
+        assertEquals(pair.second(), Integer.valueOf(6));
     }
 }

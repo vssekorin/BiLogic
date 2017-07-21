@@ -19,13 +19,13 @@ import static jdk.internal.org.objectweb.asm.Opcodes.GOTO;
 import static org.junit.Assert.assertTrue;
 
 /**
- * Test case for {@link Else}.
+ * Test case for {@link EndWhile}.
  *
  * @author Vseslav Sekorin (vssekorin@gmail.com)
  * @version $Id$
  * @since 1.0
  */
-public final class ElseTest {
+public class EndWhileTest {
 
     @Before
     public void setUp() throws Exception {
@@ -39,7 +39,7 @@ public final class ElseTest {
 
     @Test
     public void asBytecode() throws Exception {
-        val code = new Else().asBytecode();
+        val code = new EndWhile().asBytecode();
         val list = new InsnList();
         list.add(new JumpInsnNode(GOTO, new LabelNode()));
         list.add(new LabelNode());

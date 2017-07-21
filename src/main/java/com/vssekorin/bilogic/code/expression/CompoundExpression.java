@@ -20,7 +20,7 @@ import lombok.AllArgsConstructor;
 public final class CompoundExpression implements Expression {
 
     /**
-     * Expression text
+     * Expression text.
      */
     private final String string;
 

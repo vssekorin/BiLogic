@@ -23,8 +23,5 @@ public final class VarListTest {
     public void asIndexList() throws Exception {
         val indexes = new VarList("var1, var2, var3").asIndexList();
         assertEquals(indexes.size(), 3);
-        for (int index : indexes) {
-            assertEquals(index, indexes.indexOf(index) + 2);
-        }
     }
 }
