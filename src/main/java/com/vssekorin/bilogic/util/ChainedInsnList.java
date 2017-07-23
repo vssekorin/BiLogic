@@ -1,3 +1,8 @@
+/**
+ * The MIT License (MIT)
+ *
+ * Copyright (c) 2017 Vseslav Sekorin
+ */
 package com.vssekorin.bilogic.util;
 
 import jdk.internal.org.objectweb.asm.tree.AbstractInsnNode;
@@ -5,7 +10,12 @@ import jdk.internal.org.objectweb.asm.tree.InsnList;
 import lombok.Getter;
 
 /**
- * @author VsSekorin
+ * InsnList with chained add operation.
+ *
+ * @author Vseslav Sekorin (vssekorin@gmail.com)
+ * @version $Id$
+ * @see InsnList
+ * @since 1.0
  */
 public final class ChainedInsnList {
 
