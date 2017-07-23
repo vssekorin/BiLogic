@@ -6,6 +6,7 @@
 package com.vssekorin.bilogic.code;
 
 import com.vssekorin.bilogic.code.expression.SomeExpression;
+import com.vssekorin.bilogic.util.ChainedInsnList;
 import com.vssekorin.bilogic.util.Labels;
 import jdk.internal.org.objectweb.asm.tree.InsnList;
 import jdk.internal.org.objectweb.asm.tree.JumpInsnNode;
@@ -32,17 +33,17 @@ public final class While implements Code {
 
     @Override
     public InsnList asBytecode() {
-        val code = new InsnList();
         val expression = line
             .replace("while", "")
             .replace("do", "")
             .trim();
         val start = new LabelNode();
         val ifeq = new LabelNode();
-        code.add(start);
-        code.add(new SomeExpression(expression).asBytecode());
-        code.add(new JumpInsnNode(IFEQ, ifeq));
         Labels.getInstance().add(start, ifeq);
-        return code;
+        return new ChainedInsnList()
+            .add(start)
+            .add(new SomeExpression(expression).asBytecode())
+            .add(new JumpInsnNode(IFEQ, ifeq))
+            .getInsnList();
     }
 }

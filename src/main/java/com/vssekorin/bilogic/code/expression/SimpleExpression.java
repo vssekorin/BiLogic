@@ -35,10 +35,9 @@ public final class SimpleExpression implements Expression {
         switch (this.string) {
             case "true": code.add(new InsnNode(ICONST_1)); break;
             case "false": code.add(new InsnNode(ICONST_0)); break;
-            default:
-                val vars = Vars.getInstance();
-                vars.add(this.string);
-                code.add(new VarInsnNode(ILOAD, vars.index(this.string)));
+            default: code.add(
+                new VarInsnNode(ILOAD, Vars.getInstance().index(this.string))
+            );
         }
         return code;
     }

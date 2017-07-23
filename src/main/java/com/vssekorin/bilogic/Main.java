@@ -6,6 +6,7 @@
 package com.vssekorin.bilogic;
 
 import com.vssekorin.bilogic.code.BLCodeFile;
+import com.vssekorin.bilogic.util.ChainedInsnList;
 import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
 import lombok.SneakyThrows;

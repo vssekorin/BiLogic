@@ -5,11 +5,11 @@
  */
 package com.vssekorin.bilogic.code;
 
+import com.vssekorin.bilogic.util.ChainedInsnList;
 import jdk.internal.org.objectweb.asm.tree.InsnList;
 import jdk.internal.org.objectweb.asm.tree.LdcInsnNode;
 import jdk.internal.org.objectweb.asm.tree.MethodInsnNode;
 import lombok.AllArgsConstructor;
-import lombok.val;
 
 import static jdk.internal.org.objectweb.asm.Opcodes.INVOKEVIRTUAL;
 
@@ -30,15 +30,15 @@ public final class OutString implements Code {
 
     @Override
     public InsnList asBytecode() {
-        val code = new InsnList();
-        code.add(new LdcInsnNode(line));
-        code.add(new MethodInsnNode(
-            INVOKEVIRTUAL,
-            "java/lang/StringBuilder",
-            "append",
-            "(Ljava/lang/String;)Ljava/lang/StringBuilder;",
-            false
-        ));
-        return code;
+        return new ChainedInsnList()
+            .add(new LdcInsnNode(this.line))
+            .add(new MethodInsnNode(
+                INVOKEVIRTUAL,
+                "java/lang/StringBuilder",
+                "append",
+                "(Ljava/lang/String;)Ljava/lang/StringBuilder;",
+                false
+            ))
+            .getInsnList();
     }
 }

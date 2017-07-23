@@ -5,6 +5,7 @@
  */
 package com.vssekorin.bilogic.code.expression;
 
+import com.vssekorin.bilogic.util.Vars;
 import jdk.internal.org.objectweb.asm.tree.InsnNode;
 import jdk.internal.org.objectweb.asm.tree.VarInsnNode;
 import lombok.val;
@@ -46,6 +47,7 @@ public final class SimpleExpressionTest {
 
     @Test
     public void asBytecodeVar() throws Exception {
+        Vars.getInstance().add("name");
         val aVar = new SimpleExpression("name").asBytecode();
         val node = new VarInsnNode(ILOAD, 0);
         assertEquals(aVar.size(), 1);
