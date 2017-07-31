@@ -6,7 +6,6 @@
 package com.vssekorin.bilogic.code;
 
 import com.vssekorin.bilogic.util.ChainedInsnList;
-import jdk.internal.org.objectweb.asm.tree.InsnList;
 import jdk.internal.org.objectweb.asm.tree.InsnNode;
 import jdk.internal.org.objectweb.asm.tree.JumpInsnNode;
 import jdk.internal.org.objectweb.asm.tree.LabelNode;
@@ -35,13 +34,12 @@ public final class Result implements Code {
     private final LabelNode end;
 
     @Override
-    public InsnList asBytecode() {
+    public ChainedInsnList asBytecode() {
         return new ChainedInsnList()
             .add(new InsnNode(ICONST_1))
             .add(new JumpInsnNode(GOTO, this.end))
             .add(this.intermediate)
             .add(new InsnNode(ICONST_0))
-            .add(this.end)
-            .getInsnList();
+            .add(this.end);
     }
 }

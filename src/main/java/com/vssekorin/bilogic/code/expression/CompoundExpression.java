@@ -6,7 +6,7 @@
 package com.vssekorin.bilogic.code.expression;
 
 import com.vssekorin.bilogic.error.IncorrectExpression;
-import jdk.internal.org.objectweb.asm.tree.InsnList;
+import com.vssekorin.bilogic.util.ChainedInsnList;
 import lombok.AllArgsConstructor;
 
 /**
@@ -25,7 +25,7 @@ public final class CompoundExpression implements Expression {
     private final String string;
 
     @Override
-    public InsnList asBytecode() {
+    public ChainedInsnList asBytecode() {
         final Expression expression;
         if (this.string.contains(" -> ")) {
             expression = new Implication(this.string);

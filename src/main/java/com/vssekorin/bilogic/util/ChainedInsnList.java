@@ -42,6 +42,17 @@ public final class ChainedInsnList {
      * @param list The list
      * @return modified this
      */
+    public ChainedInsnList add(final ChainedInsnList list) {
+        this.insnList.add(list.getInsnList());
+        return this;
+    }
+
+    /**
+     * Add list of node.
+     *
+     * @param list The list
+     * @return modified this
+     */
     public ChainedInsnList add(final InsnList list) {
         this.insnList.add(list);
         return this;

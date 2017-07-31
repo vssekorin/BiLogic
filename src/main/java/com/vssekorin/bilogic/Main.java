@@ -34,7 +34,7 @@ public final class Main {
             .map(path ->
                 new JavaClassFile(
                     path,
-                    new BLCodeFile(path).asBytecode()
+                    new BLCodeFile(path).asBytecode().getInsnList()
                 )
             )
             .forEach(JavaClass::save);

@@ -6,7 +6,7 @@
 package com.vssekorin.bilogic.code;
 
 import com.vssekorin.bilogic.error.IncorrectLine;
-import jdk.internal.org.objectweb.asm.tree.InsnList;
+import com.vssekorin.bilogic.util.ChainedInsnList;
 import lombok.AllArgsConstructor;
 import lombok.val;
 
@@ -28,7 +28,7 @@ public final class BLCodeLine implements Code {
     private final String line;
 
     @Override
-    public InsnList asBytecode() {
+    public ChainedInsnList asBytecode() {
         val words = Arrays.asList(this.line.split("\\s+"));
         final Code code;
         if (words.contains("is")) {

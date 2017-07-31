@@ -7,7 +7,6 @@ package com.vssekorin.bilogic.code;
 
 import com.vssekorin.bilogic.util.ChainedInsnList;
 import com.vssekorin.bilogic.util.Labels;
-import jdk.internal.org.objectweb.asm.tree.InsnList;
 import lombok.val;
 
 /**
@@ -20,10 +19,8 @@ import lombok.val;
 public final class EndIf implements Code {
 
     @Override
-    public InsnList asBytecode() {
+    public ChainedInsnList asBytecode() {
         val pair = Labels.getInstance().pop();
-        return new ChainedInsnList()
-            .add(pair.second())
-            .getInsnList();
+        return new ChainedInsnList().add(pair.second());
     }
 }

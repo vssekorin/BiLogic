@@ -6,7 +6,7 @@
 package com.vssekorin.bilogic.code;
 
 import com.vssekorin.bilogic.error.IncorrectLine;
-import jdk.internal.org.objectweb.asm.tree.InsnList;
+import com.vssekorin.bilogic.util.ChainedInsnList;
 import lombok.AllArgsConstructor;
 import lombok.val;
 
@@ -26,7 +26,7 @@ public final class End implements Code {
     private final String line;
 
     @Override
-    public InsnList asBytecode() {
+    public ChainedInsnList asBytecode() {
         val word = this.line.replace("end", "").trim();
         final Code code;
         switch (word) {

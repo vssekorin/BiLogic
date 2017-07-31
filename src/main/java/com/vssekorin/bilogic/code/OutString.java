@@ -6,7 +6,6 @@
 package com.vssekorin.bilogic.code;
 
 import com.vssekorin.bilogic.util.ChainedInsnList;
-import jdk.internal.org.objectweb.asm.tree.InsnList;
 import jdk.internal.org.objectweb.asm.tree.LdcInsnNode;
 import jdk.internal.org.objectweb.asm.tree.MethodInsnNode;
 import lombok.AllArgsConstructor;
@@ -29,7 +28,7 @@ public final class OutString implements Code {
     private final String line;
 
     @Override
-    public InsnList asBytecode() {
+    public ChainedInsnList asBytecode() {
         return new ChainedInsnList()
             .add(new LdcInsnNode(this.line))
             .add(new MethodInsnNode(
@@ -38,7 +37,6 @@ public final class OutString implements Code {
                 "append",
                 "(Ljava/lang/String;)Ljava/lang/StringBuilder;",
                 false
-            ))
-            .getInsnList();
+            ));
     }
 }

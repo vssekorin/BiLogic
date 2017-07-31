@@ -5,7 +5,7 @@
  */
 package com.vssekorin.bilogic.code.expression;
 
-import jdk.internal.org.objectweb.asm.tree.InsnList;
+import com.vssekorin.bilogic.util.ChainedInsnList;
 import lombok.AllArgsConstructor;
 
 /**
@@ -43,15 +43,15 @@ public final class Implication implements Expression {
     /**
      * Ctor.
      *
-     * @param first Expression text of first operand
-     * @param second Expression text of second operand
+     * @param firstExp Expression text of first operand
+     * @param secondExp Expression text of second operand
      */
-    public Implication(final String first, final String second) {
-        this(new SomeExpression(first), new SomeExpression(second));
+    public Implication(final String firstExp, final String secondExp) {
+        this(new SomeExpression(firstExp), new SomeExpression(secondExp));
     }
 
     @Override
-    public InsnList asBytecode() {
+    public ChainedInsnList asBytecode() {
         return new Or(
                 new Not(this.first),
                 this.second

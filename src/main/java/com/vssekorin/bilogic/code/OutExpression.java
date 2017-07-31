@@ -7,7 +7,6 @@ package com.vssekorin.bilogic.code;
 
 import com.vssekorin.bilogic.code.expression.SomeExpression;
 import com.vssekorin.bilogic.util.ChainedInsnList;
-import jdk.internal.org.objectweb.asm.tree.InsnList;
 import jdk.internal.org.objectweb.asm.tree.MethodInsnNode;
 import lombok.AllArgsConstructor;
 import lombok.val;
@@ -30,7 +29,7 @@ public final class OutExpression implements Code {
     private final String line;
 
     @Override
-    public InsnList asBytecode() {
+    public ChainedInsnList asBytecode() {
         val expression = this.line.substring(1, this.line.length() - 1);
         return new ChainedInsnList()
             .add(new SomeExpression(expression).asBytecode())
@@ -40,7 +39,6 @@ public final class OutExpression implements Code {
                 "append",
                 "(Z)Ljava/lang/StringBuilder;",
                 false
-            ))
-            .getInsnList();
+            ));
     }
 }

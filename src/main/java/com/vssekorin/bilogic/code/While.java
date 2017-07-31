@@ -8,7 +8,6 @@ package com.vssekorin.bilogic.code;
 import com.vssekorin.bilogic.code.expression.SomeExpression;
 import com.vssekorin.bilogic.util.ChainedInsnList;
 import com.vssekorin.bilogic.util.Labels;
-import jdk.internal.org.objectweb.asm.tree.InsnList;
 import jdk.internal.org.objectweb.asm.tree.JumpInsnNode;
 import jdk.internal.org.objectweb.asm.tree.LabelNode;
 import lombok.AllArgsConstructor;
@@ -32,7 +31,7 @@ public final class While implements Code {
     private final String line;
 
     @Override
-    public InsnList asBytecode() {
+    public ChainedInsnList asBytecode() {
         val expression = line
             .replace("while", "")
             .replace("do", "")
@@ -43,7 +42,6 @@ public final class While implements Code {
         return new ChainedInsnList()
             .add(start)
             .add(new SomeExpression(expression).asBytecode())
-            .add(new JumpInsnNode(IFEQ, ifeq))
-            .getInsnList();
+            .add(new JumpInsnNode(IFEQ, ifeq));
     }
 }

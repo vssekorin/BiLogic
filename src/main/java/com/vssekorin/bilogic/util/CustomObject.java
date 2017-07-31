@@ -5,12 +5,10 @@
  */
 package com.vssekorin.bilogic.util;
 
-import jdk.internal.org.objectweb.asm.tree.InsnList;
 import jdk.internal.org.objectweb.asm.tree.InsnNode;
 import jdk.internal.org.objectweb.asm.tree.MethodInsnNode;
 import jdk.internal.org.objectweb.asm.tree.TypeInsnNode;
 import lombok.AllArgsConstructor;
-import lombok.val;
 
 import static jdk.internal.org.objectweb.asm.Opcodes.*;
 
@@ -34,11 +32,10 @@ public final class CustomObject {
      *
      * @return Code
      */
-    public InsnList codeNew() {
-        val code = new InsnList();
-        code.add(new TypeInsnNode(NEW, this.className));
-        code.add(new InsnNode(DUP));
-        return code;
+    public ChainedInsnList codeNew() {
+        return new ChainedInsnList()
+            .add(new TypeInsnNode(NEW, this.className))
+            .add(new InsnNode(DUP));
     }
 
     /**
@@ -47,16 +44,15 @@ public final class CustomObject {
      * @param types Type
      * @return Code
      */
-    public InsnList codeInit(final String types) {
-        val code = new InsnList();
-        code.add(new MethodInsnNode(
-            INVOKESPECIAL,
-            this.className,
-            "<init>",
-            types,
-            false
-        ));
-        return code;
+    public ChainedInsnList codeInit(final String types) {
+        return new ChainedInsnList()
+            .add(new MethodInsnNode(
+                INVOKESPECIAL,
+                this.className,
+                "<init>",
+                types,
+                false
+            ));
     }
 
     /**
@@ -66,15 +62,14 @@ public final class CustomObject {
      * @param types Type
      * @return Code
      */
-    public InsnList codeMethod(final String method, final String types) {
-        val code = new InsnList();
-        code.add(new MethodInsnNode(
-            INVOKEVIRTUAL,
-            this.className,
-            method,
-            types,
-            false
-        ));
-        return code;
+    public ChainedInsnList codeMethod(final String method, final String types) {
+        return new ChainedInsnList()
+            .add(new MethodInsnNode(
+                INVOKEVIRTUAL,
+                this.className,
+                method,
+                types,
+                false
+            ));
     }
 }

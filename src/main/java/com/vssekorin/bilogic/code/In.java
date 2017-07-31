@@ -5,6 +5,7 @@
  */
 package com.vssekorin.bilogic.code;
 
+import com.vssekorin.bilogic.util.ChainedInsnList;
 import com.vssekorin.bilogic.util.CustomObject;
 import com.vssekorin.bilogic.util.VarList;
 import jdk.internal.org.objectweb.asm.tree.*;
@@ -29,24 +30,24 @@ public final class In implements Code {
     private final String line;
 
     @Override
-    public InsnList asBytecode() {
-        val code = new InsnList();
+    public ChainedInsnList asBytecode() {
         val scanner = new CustomObject("java/util/Scanner");
-        code.add(scanner.codeNew());
-        code.add(new FieldInsnNode(
-            GETSTATIC,
-            "java/lang/System",
-            "in",
-            "Ljava/io/InputStream;"
-        ));
-        code.add(scanner.codeInit("(Ljava/io/InputStream;)V"));
-        code.add(new VarInsnNode(ASTORE, 1));
+        val code = new ChainedInsnList()
+            .add(scanner.codeNew())
+            .add(new FieldInsnNode(
+                GETSTATIC,
+                "java/lang/System",
+                "in",
+                "Ljava/io/InputStream;"
+            ))
+            .add(scanner.codeInit("(Ljava/io/InputStream;)V"))
+            .add(new VarInsnNode(ASTORE, 1));
         val vars = this.line.replace("in", "").trim();
         val varsIndex = new VarList(vars).asIndexList();
         for (int index : varsIndex) {
-            code.add(new VarInsnNode(ALOAD, 1));
-            code.add(scanner.codeMethod("nextBoolean", "()Z"));
-            code.add(new VarInsnNode(ISTORE, index));
+            code.add(new VarInsnNode(ALOAD, 1))
+                .add(scanner.codeMethod("nextBoolean", "()Z"))
+                .add(new VarInsnNode(ISTORE, index));
         }
         return code;
     }

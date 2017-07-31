@@ -5,6 +5,7 @@
  */
 package com.vssekorin.bilogic.code;
 
+import com.vssekorin.bilogic.util.ChainedInsnList;
 import jdk.internal.org.objectweb.asm.tree.InsnList;
 import lombok.AllArgsConstructor;
 import lombok.SneakyThrows;
@@ -29,8 +30,8 @@ public final class BLCodeFile implements Code {
     private final Path path;
 
     @Override @SneakyThrows
-    public InsnList asBytecode() {
-        val code = new InsnList();
+    public ChainedInsnList asBytecode() {
+        val code = new ChainedInsnList();
         Files.lines(this.path)
             .map(String::trim)
             .filter(str -> !str.isEmpty())

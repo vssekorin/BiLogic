@@ -5,7 +5,7 @@
  */
 package com.vssekorin.bilogic.code;
 
-import jdk.internal.org.objectweb.asm.tree.InsnList;
+import com.vssekorin.bilogic.util.ChainedInsnList;
 import lombok.AllArgsConstructor;
 
 /**
@@ -24,7 +24,7 @@ public final class OutElement implements Code {
     private final String line;
 
     @Override
-    public InsnList asBytecode() {
+    public ChainedInsnList asBytecode() {
         final Code code;
         if (this.line.startsWith("{") && this.line.endsWith("}")) {
             code = new OutExpression(this.line);

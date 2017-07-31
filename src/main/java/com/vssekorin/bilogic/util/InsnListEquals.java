@@ -34,6 +34,18 @@ public final class InsnListEquals {
     private final InsnList secondList;
 
     /**
+     * Ctor.
+     *
+     * @param first The first list
+     * @param second The second list
+     */
+    public InsnListEquals(
+        final ChainedInsnList first,
+        final ChainedInsnList second) {
+        this(first.getInsnList(), second.getInsnList());
+    }
+
+    /**
      * Check that first list equals second.
      *
      * @return Result
@@ -41,13 +53,8 @@ public final class InsnListEquals {
     public boolean value() {
         val firstIter = this.firstList.iterator();
         val secondIter = this.secondList.iterator();
-        final boolean result;
-        if (this.firstList.size() == this.secondList.size()) {
-            result = elementEquals(firstIter, secondIter, true);
-        } else {
-            result = false;
-        }
-        return result;
+        return this.firstList.size() == this.secondList.size()
+            && elementEquals(firstIter, secondIter, true);
     }
 
     /**

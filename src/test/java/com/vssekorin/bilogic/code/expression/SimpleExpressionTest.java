@@ -27,7 +27,7 @@ public final class SimpleExpressionTest {
 
     @Test
     public void asBytecodeTrue() throws Exception {
-        val aTrue = new SimpleExpression("true").asBytecode();
+        val aTrue = new SimpleExpression("true").asBytecode().getInsnList();
         val node = new InsnNode(ICONST_1);
         assertEquals(aTrue.size(), 1);
         val element = aTrue.getFirst();
@@ -37,7 +37,7 @@ public final class SimpleExpressionTest {
 
     @Test
     public void asBytecodeFalse() throws Exception {
-        val aFalse = new SimpleExpression("false").asBytecode();
+        val aFalse = new SimpleExpression("false").asBytecode().getInsnList();
         val node = new InsnNode(ICONST_0);
         assertEquals(aFalse.size(), 1);
         val element = aFalse.getFirst();
@@ -48,7 +48,7 @@ public final class SimpleExpressionTest {
     @Test
     public void asBytecodeVar() throws Exception {
         Vars.getInstance().add("name");
-        val aVar = new SimpleExpression("name").asBytecode();
+        val aVar = new SimpleExpression("name").asBytecode().getInsnList();
         val node = new VarInsnNode(ILOAD, 0);
         assertEquals(aVar.size(), 1);
         val element = aVar.getFirst();

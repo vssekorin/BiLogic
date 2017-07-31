@@ -5,10 +5,10 @@
  */
 package com.vssekorin.bilogic.code;
 
+import com.vssekorin.bilogic.util.ChainedInsnList;
 import com.vssekorin.bilogic.util.InsnListEquals;
 import com.vssekorin.bilogic.util.Labels;
 import com.vssekorin.bilogic.util.Pair;
-import jdk.internal.org.objectweb.asm.tree.InsnList;
 import jdk.internal.org.objectweb.asm.tree.LabelNode;
 import lombok.val;
 import org.junit.Before;
@@ -38,8 +38,7 @@ public class EndIfTest {
     @Test
     public void asBytecode() throws Exception {
         val code = new EndIf().asBytecode();
-        val list = new InsnList();
-        list.add(new LabelNode());
+        val list = new ChainedInsnList().add(new LabelNode());
         assertTrue(new InsnListEquals(code, list).value());
     }
 }
