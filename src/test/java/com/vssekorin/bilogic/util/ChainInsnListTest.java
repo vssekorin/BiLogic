@@ -17,17 +17,17 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
 /**
- * Test case for {@link ChainedInsnList}.
+ * Test case for {@link ChainInsnList}.
  *
  * @author Vseslav Sekorin (vssekorin@gmail.com)
  * @version $Id$
  * @since 1.0
  */
-public class ChainedInsnListTest {
+public class ChainInsnListTest {
 
     @Test
     public void equalsInsnList() throws Exception {
-        val chained = new ChainedInsnList()
+        val chained = new ChainInsnList()
             .add(new LabelNode())
             .add(new InsnNode(ICONST_1))
             .getInsnList();
@@ -39,7 +39,7 @@ public class ChainedInsnListTest {
 
     @Test
     public void notEqualsInsnList() throws Exception {
-        val chained = new ChainedInsnList()
+        val chained = new ChainInsnList()
             .add(new LabelNode())
             .add(new InsnNode(ICONST_0))
             .getInsnList();

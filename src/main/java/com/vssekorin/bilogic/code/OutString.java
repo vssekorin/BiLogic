@@ -5,7 +5,7 @@
  */
 package com.vssekorin.bilogic.code;
 
-import com.vssekorin.bilogic.util.ChainedInsnList;
+import com.vssekorin.bilogic.util.ChainInsnList;
 import jdk.internal.org.objectweb.asm.tree.LdcInsnNode;
 import jdk.internal.org.objectweb.asm.tree.MethodInsnNode;
 import lombok.AllArgsConstructor;
@@ -28,8 +28,8 @@ public final class OutString implements Code {
     private final String line;
 
     @Override
-    public ChainedInsnList asBytecode() {
-        return new ChainedInsnList()
+    public ChainInsnList asBytecode() {
+        return new ChainInsnList()
             .add(new LdcInsnNode(this.line))
             .add(new MethodInsnNode(
                 INVOKEVIRTUAL,

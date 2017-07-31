@@ -6,7 +6,7 @@
 package com.vssekorin.bilogic.code.expression;
 
 import com.vssekorin.bilogic.code.Result;
-import com.vssekorin.bilogic.util.ChainedInsnList;
+import com.vssekorin.bilogic.util.ChainInsnList;
 import jdk.internal.org.objectweb.asm.tree.JumpInsnNode;
 import jdk.internal.org.objectweb.asm.tree.LabelNode;
 import lombok.AllArgsConstructor;
@@ -58,8 +58,8 @@ public final class Or implements Expression {
     }
 
     @Override
-    public ChainedInsnList asBytecode() {
-        val code = new ChainedInsnList();
+    public ChainInsnList asBytecode() {
+        val code = new ChainInsnList();
         val ifne = new LabelNode();
         val ifeq = new LabelNode();
         val end = new LabelNode();

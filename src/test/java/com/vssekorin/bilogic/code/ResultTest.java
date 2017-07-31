@@ -5,7 +5,7 @@
  */
 package com.vssekorin.bilogic.code;
 
-import com.vssekorin.bilogic.util.ChainedInsnList;
+import com.vssekorin.bilogic.util.ChainInsnList;
 import com.vssekorin.bilogic.util.InsnListEquals;
 import jdk.internal.org.objectweb.asm.tree.InsnNode;
 import jdk.internal.org.objectweb.asm.tree.JumpInsnNode;
@@ -32,7 +32,7 @@ public final class ResultTest {
         val second = new LabelNode();
         val code = new Result(first, second).asBytecode();
         assertEquals(code.getInsnList().size(), 5);
-        val test = new ChainedInsnList()
+        val test = new ChainInsnList()
             .add(new InsnNode(ICONST_1))
             .add(new JumpInsnNode(GOTO, second))
             .add(first)

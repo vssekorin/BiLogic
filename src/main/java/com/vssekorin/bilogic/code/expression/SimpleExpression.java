@@ -5,7 +5,7 @@
  */
 package com.vssekorin.bilogic.code.expression;
 
-import com.vssekorin.bilogic.util.ChainedInsnList;
+import com.vssekorin.bilogic.util.ChainInsnList;
 import com.vssekorin.bilogic.util.Vars;
 import jdk.internal.org.objectweb.asm.tree.InsnNode;
 import jdk.internal.org.objectweb.asm.tree.VarInsnNode;
@@ -30,8 +30,8 @@ public final class SimpleExpression implements Expression {
     private final String string;
 
     @Override
-    public ChainedInsnList asBytecode() {
-        val code = new ChainedInsnList();
+    public ChainInsnList asBytecode() {
+        val code = new ChainInsnList();
         switch (this.string) {
             case "true": code.add(new InsnNode(ICONST_1)); break;
             case "false": code.add(new InsnNode(ICONST_0)); break;

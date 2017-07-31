@@ -5,7 +5,7 @@
  */
 package com.vssekorin.bilogic.code;
 
-import com.vssekorin.bilogic.util.ChainedInsnList;
+import com.vssekorin.bilogic.util.ChainInsnList;
 
 /**
  * Code.
@@ -19,8 +19,8 @@ public interface Code {
     /**
      * Convert to JVM bytecode.
      *
-     * @see ChainedInsnList
+     * @see ChainInsnList
      * @return Bytecode
      */
-    ChainedInsnList asBytecode();
+    ChainInsnList asBytecode();
 }

@@ -6,7 +6,7 @@
 package com.vssekorin.bilogic.code;
 
 import com.vssekorin.bilogic.code.expression.SomeExpression;
-import com.vssekorin.bilogic.util.ChainedInsnList;
+import com.vssekorin.bilogic.util.ChainInsnList;
 import jdk.internal.org.objectweb.asm.tree.MethodInsnNode;
 import lombok.AllArgsConstructor;
 import lombok.val;
@@ -29,9 +29,9 @@ public final class OutExpression implements Code {
     private final String line;
 
     @Override
-    public ChainedInsnList asBytecode() {
+    public ChainInsnList asBytecode() {
         val expression = this.line.substring(1, this.line.length() - 1);
-        return new ChainedInsnList()
+        return new ChainInsnList()
             .add(new SomeExpression(expression).asBytecode())
             .add(new MethodInsnNode(
                 INVOKEVIRTUAL,

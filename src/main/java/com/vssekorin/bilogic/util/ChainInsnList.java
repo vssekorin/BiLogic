@@ -17,7 +17,7 @@ import lombok.Getter;
  * @see InsnList
  * @since 1.0
  */
-public final class ChainedInsnList {
+public final class ChainInsnList {
 
     /**
      * The origin InsnList.
@@ -31,7 +31,7 @@ public final class ChainedInsnList {
      * @param node The node
      * @return modified this
      */
-    public ChainedInsnList add(final AbstractInsnNode node) {
+    public ChainInsnList add(final AbstractInsnNode node) {
         this.insnList.add(node);
         return this;
     }
@@ -42,7 +42,7 @@ public final class ChainedInsnList {
      * @param list The list
      * @return modified this
      */
-    public ChainedInsnList add(final ChainedInsnList list) {
+    public ChainInsnList add(final ChainInsnList list) {
         this.insnList.add(list.getInsnList());
         return this;
     }
@@ -53,7 +53,7 @@ public final class ChainedInsnList {
      * @param list The list
      * @return modified this
      */
-    public ChainedInsnList add(final InsnList list) {
+    public ChainInsnList add(final InsnList list) {
         this.insnList.add(list);
         return this;
     }

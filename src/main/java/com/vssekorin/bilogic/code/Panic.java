@@ -5,7 +5,7 @@
  */
 package com.vssekorin.bilogic.code;
 
-import com.vssekorin.bilogic.util.ChainedInsnList;
+import com.vssekorin.bilogic.util.ChainInsnList;
 import com.vssekorin.bilogic.util.CustomObject;
 import jdk.internal.org.objectweb.asm.tree.*;
 import lombok.AllArgsConstructor;
@@ -30,10 +30,10 @@ public final class Panic implements Code {
     private final String line;
 
     @Override
-    public ChainedInsnList asBytecode() {
+    public ChainInsnList asBytecode() {
         val exception = new CustomObject("java/lang/RuntimeException");
         val message = this.line.replace("panic", "").trim();
-        return new ChainedInsnList()
+        return new ChainInsnList()
             .add(exception.codeNew())
             .add(new LdcInsnNode(message))
             .add(exception.codeInit("(Ljava/lang/String;)V"))

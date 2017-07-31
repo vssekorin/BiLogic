@@ -5,7 +5,7 @@
  */
 package com.vssekorin.bilogic.code;
 
-import com.vssekorin.bilogic.util.ChainedInsnList;
+import com.vssekorin.bilogic.util.ChainInsnList;
 import com.vssekorin.bilogic.util.CustomObject;
 import jdk.internal.org.objectweb.asm.tree.*;
 import lombok.AllArgsConstructor;
@@ -31,9 +31,9 @@ public final class Out implements Code {
     private final String line;
 
     @Override
-    public ChainedInsnList asBytecode() {
+    public ChainInsnList asBytecode() {
         val stringBuilder = new CustomObject("java/lang/StringBuilder");
-        return new ChainedInsnList()
+        return new ChainInsnList()
             .add(new FieldInsnNode(
                 GETSTATIC,
                 "java/lang/System",
@@ -58,8 +58,8 @@ public final class Out implements Code {
      *
      * @return Bytecode
      */
-    private ChainedInsnList codeOutput() {
-        val code = new ChainedInsnList();
+    private ChainInsnList codeOutput() {
+        val code = new ChainInsnList();
         val words = this.line
             .replace("out", "")
             .trim()

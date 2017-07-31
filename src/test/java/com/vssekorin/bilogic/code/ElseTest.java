@@ -5,7 +5,7 @@
  */
 package com.vssekorin.bilogic.code;
 
-import com.vssekorin.bilogic.util.ChainedInsnList;
+import com.vssekorin.bilogic.util.ChainInsnList;
 import com.vssekorin.bilogic.util.InsnListEquals;
 import com.vssekorin.bilogic.util.Labels;
 import com.vssekorin.bilogic.util.Pair;
@@ -40,7 +40,7 @@ public final class ElseTest {
     @Test
     public void asBytecode() throws Exception {
         val code = new Else().asBytecode();
-        val list = new ChainedInsnList()
+        val list = new ChainInsnList()
             .add(new JumpInsnNode(GOTO, new LabelNode()))
             .add(new LabelNode());
         assertTrue(new InsnListEquals(code, list).value());

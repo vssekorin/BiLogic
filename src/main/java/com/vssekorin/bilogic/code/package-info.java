@@ -10,7 +10,7 @@
  * @author Vseslav Sekorin (vssekorin@gmail.com)
  * @version $Id$
  * @see jdk.internal.org.objectweb.asm.tree.InsnList
- * @see com.vssekorin.bilogic.util.ChainedInsnList
+ * @see com.vssekorin.bilogic.util.ChainInsnList
  * @since 1.0
  */
 package com.vssekorin.bilogic.code;

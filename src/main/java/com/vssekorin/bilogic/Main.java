@@ -30,7 +30,7 @@ public final class Main {
         Files.walk(Paths.get(args[0]))
             .parallel()
             .filter(Files::isRegularFile)
-            .filter(item -> item.toString().endsWith(".bilog"))
+            .filter(item -> item.toString().endsWith(BLCodeFile.EXTENSION))
             .map(path ->
                 new JavaClassFile(
                     path,

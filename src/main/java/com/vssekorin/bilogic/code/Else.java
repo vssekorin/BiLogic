@@ -5,7 +5,7 @@
  */
 package com.vssekorin.bilogic.code;
 
-import com.vssekorin.bilogic.util.ChainedInsnList;
+import com.vssekorin.bilogic.util.ChainInsnList;
 import com.vssekorin.bilogic.util.Labels;
 import jdk.internal.org.objectweb.asm.tree.JumpInsnNode;
 import lombok.val;
@@ -22,9 +22,9 @@ import static jdk.internal.org.objectweb.asm.Opcodes.GOTO;
 public final class Else implements Code {
 
     @Override
-    public ChainedInsnList asBytecode() {
+    public ChainInsnList asBytecode() {
         val pair = Labels.getInstance().peek();
-        return new ChainedInsnList()
+        return new ChainInsnList()
             .add(new JumpInsnNode(GOTO, pair.second()))
             .add(pair.first());
     }

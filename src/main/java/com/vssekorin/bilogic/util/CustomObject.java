@@ -32,8 +32,8 @@ public final class CustomObject {
      *
      * @return Code
      */
-    public ChainedInsnList codeNew() {
-        return new ChainedInsnList()
+    public ChainInsnList codeNew() {
+        return new ChainInsnList()
             .add(new TypeInsnNode(NEW, this.className))
             .add(new InsnNode(DUP));
     }
@@ -44,8 +44,8 @@ public final class CustomObject {
      * @param types Type
      * @return Code
      */
-    public ChainedInsnList codeInit(final String types) {
-        return new ChainedInsnList()
+    public ChainInsnList codeInit(final String types) {
+        return new ChainInsnList()
             .add(new MethodInsnNode(
                 INVOKESPECIAL,
                 this.className,
@@ -62,8 +62,8 @@ public final class CustomObject {
      * @param types Type
      * @return Code
      */
-    public ChainedInsnList codeMethod(final String method, final String types) {
-        return new ChainedInsnList()
+    public ChainInsnList codeMethod(final String method, final String types) {
+        return new ChainInsnList()
             .add(new MethodInsnNode(
                 INVOKEVIRTUAL,
                 this.className,

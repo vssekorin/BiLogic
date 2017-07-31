@@ -5,7 +5,7 @@
  */
 package com.vssekorin.bilogic.code.expression;
 
-import com.vssekorin.bilogic.util.ChainedInsnList;
+import com.vssekorin.bilogic.util.ChainInsnList;
 import lombok.AllArgsConstructor;
 
 /**
@@ -51,7 +51,7 @@ public final class Implication implements Expression {
     }
 
     @Override
-    public ChainedInsnList asBytecode() {
+    public ChainInsnList asBytecode() {
         return new Or(
                 new Not(this.first),
                 this.second

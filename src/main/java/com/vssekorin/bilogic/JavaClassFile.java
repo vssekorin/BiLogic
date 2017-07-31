@@ -5,6 +5,7 @@
  */
 package com.vssekorin.bilogic;
 
+import com.vssekorin.bilogic.code.BLCodeFile;
 import jdk.internal.org.objectweb.asm.ClassWriter;
 import jdk.internal.org.objectweb.asm.tree.ClassNode;
 import jdk.internal.org.objectweb.asm.tree.InsnList;
@@ -91,7 +92,7 @@ public final class JavaClassFile implements JavaClass {
         return Optional.ofNullable(this.path)
             .map(Path::getFileName)
             .map(Path::toString)
-            .map(item -> item.replace(".bilog", ""))
+            .map(item -> item.replace(BLCodeFile.EXTENSION, ""))
             .orElseThrow(IllegalArgumentException::new);
     }
 
@@ -104,6 +105,6 @@ public final class JavaClassFile implements JavaClass {
         return this.path
             .toAbsolutePath()
             .toString()
-            .replace(".bilog", ".class");
+            .replace(BLCodeFile.EXTENSION, ".class");
     }
 }

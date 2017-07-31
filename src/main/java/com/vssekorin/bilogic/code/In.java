@@ -5,7 +5,7 @@
  */
 package com.vssekorin.bilogic.code;
 
-import com.vssekorin.bilogic.util.ChainedInsnList;
+import com.vssekorin.bilogic.util.ChainInsnList;
 import com.vssekorin.bilogic.util.CustomObject;
 import com.vssekorin.bilogic.util.VarList;
 import jdk.internal.org.objectweb.asm.tree.*;
@@ -30,9 +30,9 @@ public final class In implements Code {
     private final String line;
 
     @Override
-    public ChainedInsnList asBytecode() {
+    public ChainInsnList asBytecode() {
         val scanner = new CustomObject("java/util/Scanner");
-        val code = new ChainedInsnList()
+        val code = new ChainInsnList()
             .add(scanner.codeNew())
             .add(new FieldInsnNode(
                 GETSTATIC,
