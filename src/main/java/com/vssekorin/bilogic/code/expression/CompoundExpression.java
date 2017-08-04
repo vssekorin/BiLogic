@@ -9,6 +9,9 @@ import com.vssekorin.bilogic.error.IncorrectExpression;
 import com.vssekorin.bilogic.util.ChainInsnList;
 import lombok.AllArgsConstructor;
 
+import java.util.Arrays;
+import java.util.List;
+
 /**
  * Compound expression.
  *
@@ -24,26 +27,39 @@ public final class CompoundExpression implements Expression {
      */
     private final String string;
 
+    /**
+     * List of operations.
+     */
+    private static final List<String> OPERATIONS = Arrays.asList(
+        " -> ", " or ", " and ", "not "
+    );
+
     @Override
     public ChainInsnList asBytecode() {
         final Expression expression;
-        if (this.string.contains(" -> ")) {
-            expression = new Implication(this.string);
-        } else {
-            if (this.string.contains(" or ")) {
-                expression = new Or(this.string);
-            } else {
-                if (this.string.contains(" and ")) {
-                    expression = new And(this.string);
-                } else {
-                    if (this.string.contains("not ")) {
-                        expression = new Not(this.string);
-                    } else {
-                        throw new IncorrectExpression(this.string);
-                    }
-                }
-            }
+        switch (this.nextOperation()) {
+            case 0: expression = new Implication(this.string); break;
+            case 1: expression = new Or(this.string); break;
+            case 2: expression = new And(this.string); break;
+            case 3: expression = new Not(this.string); break;
+            default: throw new IncorrectExpression(this.string);
         }
         return expression.asBytecode();
+    }
+
+    /**
+     * Get number of next operation to expression.
+     *
+     * @return The number
+     */
+    private int nextOperation() {
+        int result = -1;
+        for (int i = 0; i < OPERATIONS.size(); i++) {
+            if (this.string.contains(OPERATIONS.get(i))) {
+                result = i;
+                break;
+            }
+        }
+        return result;
     }
 }

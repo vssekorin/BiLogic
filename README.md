@@ -1,4 +1,4 @@
-**BiLogic** is programming language for JVM. All variables are boolean.
+**BiLogic** is programming language (esoteric) for JVM. All variables are boolean.
 
 ## Assignment
 
@@ -11,8 +11,8 @@ Operations:
 Assignment := <VarList> is <Expression>
 VarList := varname, <VarList> | varname
 Expression := true | false | varname | not <Expression>
-        <Expression> <Operation> <Expression>
-Operation := and | or | ->
+        <Expression> <BOperation> <Expression>
+BOperation := and | or | ->
 ```
 Examples:
 ```
