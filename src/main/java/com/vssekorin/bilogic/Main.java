@@ -5,7 +5,6 @@
  */
 package com.vssekorin.bilogic;
 
-import com.vssekorin.bilogic.code.BLCodeFile;
 import lombok.SneakyThrows;
 
 import java.nio.file.Files;
@@ -34,7 +33,7 @@ public final class Main {
             .map(path ->
                 new JavaClassFile(
                     path,
-                    new BLCodeFile(path).asBytecode().getInsnList()
+                    new BLCodeFile(path).asMetodList()
                 )
             )
             .forEach(JavaClass::save);

@@ -5,8 +5,9 @@
  */
 package com.vssekorin.bilogic.code;
 
+import com.vssekorin.bilogic.method.MethodInfo;
 import com.vssekorin.bilogic.util.ChainInsnList;
-import com.vssekorin.bilogic.util.Labels;
+import lombok.AllArgsConstructor;
 import lombok.val;
 
 /**
@@ -16,11 +17,17 @@ import lombok.val;
  * @version $Id$
  * @since 1.0
  */
+@AllArgsConstructor
 public final class EndIf implements Code {
+
+    /**
+     * The information about method.
+     */
+    private final MethodInfo info;
 
     @Override
     public ChainInsnList asBytecode() {
-        val pair = Labels.getInstance().pop();
+        val pair = this.info.labels().pop();
         return new ChainInsnList().add(pair.second());
     }
 }

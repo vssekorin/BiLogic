@@ -5,11 +5,8 @@
  */
 package com.vssekorin.bilogic;
 
-import com.vssekorin.bilogic.code.BLCodeFile;
 import jdk.internal.org.objectweb.asm.ClassWriter;
 import jdk.internal.org.objectweb.asm.tree.ClassNode;
-import jdk.internal.org.objectweb.asm.tree.InsnList;
-import jdk.internal.org.objectweb.asm.tree.InsnNode;
 import jdk.internal.org.objectweb.asm.tree.MethodNode;
 import lombok.AllArgsConstructor;
 import lombok.SneakyThrows;
@@ -17,7 +14,7 @@ import lombok.SneakyThrows;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.Optional;
+import java.util.List;
 
 import static jdk.internal.org.objectweb.asm.Opcodes.*;
 
@@ -39,12 +36,12 @@ public final class JavaClassFile implements JavaClass {
     /**
      * Bytecode of method main.
      */
-    private final InsnList methodMain;
+    private final List<MethodNode> methods;
 
     @Override @SneakyThrows
     public void save() {
         ClassNode classNode = new ClassNode();
-        this.header(classNode).methods.add(this.main());
+        this.header(classNode).methods.addAll(this.methods);
         ClassWriter writer = new ClassWriter(ClassWriter.COMPUTE_FRAMES);
         classNode.accept(writer);
         Files.write(Paths.get(this.newPath()), writer.toByteArray());
@@ -58,42 +55,10 @@ public final class JavaClassFile implements JavaClass {
      */
     private ClassNode header(final ClassNode node) {
         node.access = ACC_PUBLIC + ACC_SUPER;
-        node.name = this.name();
+        node.name = BLCodeFile.className(this.path);
         node.superName = "java/lang/Object";
         node.version = V1_8;
         return node;
-    }
-
-    /**
-     * Create method public static void main(String[] args).
-     *
-     * @return Method
-     */
-    private MethodNode main() {
-        MethodNode node = new MethodNode(
-            ACC_PUBLIC + ACC_STATIC,
-            "main",
-            "([Ljava/lang/String;)V",
-            null,
-            null
-        );
-        InsnList instructions = node.instructions;
-        instructions.add(this.methodMain);
-        instructions.add(new InsnNode(RETURN));
-        return node;
-    }
-
-    /**
-     * Filename without extension.
-     *
-     * @return Filename
-     */
-    private String name() {
-        return Optional.ofNullable(this.path)
-            .map(Path::getFileName)
-            .map(Path::toString)
-            .map(item -> item.replace(BLCodeFile.EXTENSION, ""))
-            .orElseThrow(IllegalArgumentException::new);
     }
 
     /**

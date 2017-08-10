@@ -6,6 +6,7 @@
 package com.vssekorin.bilogic.code.expression;
 
 import com.vssekorin.bilogic.code.Result;
+import com.vssekorin.bilogic.method.MethodInfo;
 import com.vssekorin.bilogic.util.ChainInsnList;
 import jdk.internal.org.objectweb.asm.tree.JumpInsnNode;
 import jdk.internal.org.objectweb.asm.tree.LabelNode;
@@ -32,11 +33,15 @@ public final class Not implements Expression {
     /**
      * Ctor.
      *
+     * @param information The information
      * @param string Expression text
      */
-    public Not(final String string) {
+    public Not(final MethodInfo information, final String string) {
         this(
-            new SimpleExpression(string.replace("not", "").trim())
+            new SimpleExpression(
+                information,
+                string.replace("not", "").trim()
+            )
         );
     }
 

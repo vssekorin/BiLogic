@@ -5,14 +5,9 @@
  */
 package com.vssekorin.bilogic.code;
 
-import com.vssekorin.bilogic.code.expression.SomeExpression;
+import com.vssekorin.bilogic.method.MethodInfo;
 import com.vssekorin.bilogic.util.ChainInsnList;
-import com.vssekorin.bilogic.util.VarList;
-import jdk.internal.org.objectweb.asm.tree.VarInsnNode;
 import lombok.AllArgsConstructor;
-import lombok.val;
-
-import static jdk.internal.org.objectweb.asm.Opcodes.ISTORE;
 
 /**
  * Assignment.
@@ -25,20 +20,23 @@ import static jdk.internal.org.objectweb.asm.Opcodes.ISTORE;
 public final class Assignment implements Code {
 
     /**
+     * The information about method.
+     */
+    private final MethodInfo info;
+
+    /**
      * The line with assignment.
      */
     private final String line;
 
     @Override
     public ChainInsnList asBytecode() {
-        val code = new ChainInsnList();
-        val words = line.split("\\s+is\\s+");
-        val varsIndex = new VarList(words[0]).asIndexList();
-        val expression = new SomeExpression(words[1]);
-        for (int index : varsIndex) {
-            code.add(expression.asBytecode());
-            code.add(new VarInsnNode(ISTORE, index));
+        final Code code;
+        if (this.line.contains(" is ")) {
+            code = new Is(this.info, this.line);
+        } else {
+            code = new Invoke(this.info, this.line);
         }
-        return code;
+        return code.asBytecode();
     }
 }

@@ -1,1 +1,3 @@
-out Hello, World!
+def main
+    out Hello, World!
+end def

@@ -6,6 +6,7 @@
 package com.vssekorin.bilogic.code.expression;
 
 import com.vssekorin.bilogic.error.IncorrectExpression;
+import com.vssekorin.bilogic.method.MethodInfo;
 import com.vssekorin.bilogic.util.ChainInsnList;
 import lombok.AllArgsConstructor;
 
@@ -23,6 +24,11 @@ import java.util.List;
 public final class CompoundExpression implements Expression {
 
     /**
+     * The information about method.
+     */
+    private final MethodInfo info;
+
+    /**
      * Expression text.
      */
     private final String string;
@@ -38,10 +44,10 @@ public final class CompoundExpression implements Expression {
     public ChainInsnList asBytecode() {
         final Expression expression;
         switch (this.nextOperation()) {
-            case 0: expression = new Implication(this.string); break;
-            case 1: expression = new Or(this.string); break;
-            case 2: expression = new And(this.string); break;
-            case 3: expression = new Not(this.string); break;
+            case 0: expression = new Implication(this.info, this.string); break;
+            case 1: expression = new Or(this.info, this.string); break;
+            case 2: expression = new And(this.info, this.string); break;
+            case 3: expression = new Not(this.info, this.string); break;
             default: throw new IncorrectExpression(this.string);
         }
         return expression.asBytecode();
