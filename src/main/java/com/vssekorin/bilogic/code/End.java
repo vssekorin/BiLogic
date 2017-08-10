@@ -6,6 +6,7 @@
 package com.vssekorin.bilogic.code;
 
 import com.vssekorin.bilogic.error.IncorrectLine;
+import com.vssekorin.bilogic.method.MethodInfo;
 import com.vssekorin.bilogic.util.ChainInsnList;
 import lombok.AllArgsConstructor;
 import lombok.val;
@@ -21,6 +22,11 @@ import lombok.val;
 public final class End implements Code {
 
     /**
+     * The information about method.
+     */
+    private final MethodInfo info;
+
+    /**
      * Line contains "end".
      */
     private final String line;
@@ -30,8 +36,9 @@ public final class End implements Code {
         val word = this.line.replace("end", "").trim();
         final Code code;
         switch (word) {
-            case "if": code = new EndIf(); break;
-            case "while": code = new EndWhile(); break;
+            case "if": code = new EndIf(this.info); break;
+            case "while": code = new EndWhile(this.info); break;
+            case "def": code = new EndDef(this.info); break;
             default: throw new IncorrectLine(line);
         }
         return code.asBytecode();

@@ -6,35 +6,18 @@
 package com.vssekorin.bilogic.util;
 
 import jdk.internal.org.objectweb.asm.tree.LabelNode;
-import lombok.AccessLevel;
-import lombok.NoArgsConstructor;
 
 import java.util.ArrayDeque;
 import java.util.Deque;
 
 /**
- * Singleton for labels.
+ * Labels.
  *
  * @author Vseslav Sekorin (vssekorin@gmail.com)
  * @version $Id$
  * @since 1.0
  */
-@NoArgsConstructor(access = AccessLevel.PRIVATE)
 public final class Labels {
-
-    /**
-     * Instance.
-     */
-    private static Labels ourInstance = new Labels();
-
-    /**
-     * Getter.
-     *
-     * @return Instance
-     */
-    public static Labels getInstance() {
-        return ourInstance;
-    }
 
     /**
      * Deque of labels pair.

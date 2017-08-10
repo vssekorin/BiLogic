@@ -6,6 +6,7 @@
 package com.vssekorin.bilogic.code.expression;
 
 import com.vssekorin.bilogic.code.Code;
+import com.vssekorin.bilogic.method.MethodInfo;
 import com.vssekorin.bilogic.util.ChainInsnList;
 import lombok.AllArgsConstructor;
 
@@ -20,6 +21,11 @@ import lombok.AllArgsConstructor;
 public final class SomeExpression implements Expression {
 
     /**
+     * The information about method.
+     */
+    private final MethodInfo info;
+
+    /**
      * Expression text.
      */
     private final String string;
@@ -28,9 +34,9 @@ public final class SomeExpression implements Expression {
     public ChainInsnList asBytecode() {
         final Code code;
         if (this.string.contains(" ")) {
-            code = new CompoundExpression(this.string);
+            code = new CompoundExpression(this.info, this.string);
         } else {
-            code = new SimpleExpression(this.string);
+            code = new SimpleExpression(this.info, this.string);
         }
         return code.asBytecode();
     }

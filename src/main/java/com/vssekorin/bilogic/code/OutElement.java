@@ -5,6 +5,7 @@
  */
 package com.vssekorin.bilogic.code;
 
+import com.vssekorin.bilogic.method.MethodInfo;
 import com.vssekorin.bilogic.util.ChainInsnList;
 import lombok.AllArgsConstructor;
 
@@ -19,6 +20,11 @@ import lombok.AllArgsConstructor;
 public final class OutElement implements Code {
 
     /**
+     * The information about method.
+     */
+    private final MethodInfo info;
+
+    /**
      * The element.
      */
     private final String line;
@@ -27,7 +33,7 @@ public final class OutElement implements Code {
     public ChainInsnList asBytecode() {
         final Code code;
         if (this.line.startsWith("{") && this.line.endsWith("}")) {
-            code = new OutExpression(this.line);
+            code = new OutExpression(this.info, this.line);
         } else {
             code = new OutString(this.line);
         }

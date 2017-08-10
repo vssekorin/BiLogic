@@ -6,6 +6,7 @@
 package com.vssekorin.bilogic.code;
 
 import com.vssekorin.bilogic.code.expression.SomeExpression;
+import com.vssekorin.bilogic.method.MethodInfo;
 import com.vssekorin.bilogic.util.ChainInsnList;
 import jdk.internal.org.objectweb.asm.tree.MethodInsnNode;
 import lombok.AllArgsConstructor;
@@ -24,6 +25,11 @@ import static jdk.internal.org.objectweb.asm.Opcodes.INVOKEVIRTUAL;
 public final class OutExpression implements Code {
 
     /**
+     * The information about method.
+     */
+    private final MethodInfo info;
+
+    /**
      * The expression.
      */
     private final String line;
@@ -32,7 +38,7 @@ public final class OutExpression implements Code {
     public ChainInsnList asBytecode() {
         val expression = this.line.substring(1, this.line.length() - 1);
         return new ChainInsnList()
-            .add(new SomeExpression(expression).asBytecode())
+            .add(new SomeExpression(this.info, expression).asBytecode())
             .add(new MethodInsnNode(
                 INVOKEVIRTUAL,
                 "java/lang/StringBuilder",

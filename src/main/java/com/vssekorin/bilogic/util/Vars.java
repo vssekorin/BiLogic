@@ -6,40 +6,41 @@
 package com.vssekorin.bilogic.util;
 
 import com.vssekorin.bilogic.error.UnknownVariable;
-import lombok.AccessLevel;
-import lombok.NoArgsConstructor;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 /**
- * Singleton for variables.
+ * Variables.
  *
  * @author Vseslav Sekorin (vssekorin@gmail.com)
  * @version $Id$
  * @since 1.0
  */
-@NoArgsConstructor(access = AccessLevel.PRIVATE)
 public final class Vars {
-
-    /**
-     * Instance.
-     */
-    private static Vars ourInstance = new Vars();
-
-    /**
-     * Getter.
-     *
-     * @return Instance
-     */
-    public static Vars getInstance() {
-        return ourInstance;
-    }
 
     /**
      * List of variables name.
      */
-    private final List<String> list = new ArrayList<>();
+    private final List<String> list;
+
+    /**
+     * Ctor.
+     */
+    public Vars() {
+        this.list = new ArrayList<>();
+    }
+
+    /**
+     * Ctor.
+     *
+     * @param collection Variables
+     */
+    public Vars(final Collection<String> collection) {
+        this();
+        this.list.addAll(collection);
+    }
 
     /**
      * Add variable.
@@ -47,7 +48,7 @@ public final class Vars {
      * @param var Variable name
      */
     public void add(final String var) {
-        if (!this.contains(var)) {
+        if (!this.list.contains(var)) {
             this.list.add(var);
         }
     }
@@ -59,19 +60,9 @@ public final class Vars {
      * @return Index
      */
     public int index(final String var) {
-        if (!this.contains(var)) {
+        if (!this.list.contains(var)) {
             throw new UnknownVariable(var);
         }
-        return this.list.indexOf(var) + 2;
-    }
-
-    /**
-     * Check list contains variable.
-     *
-     * @param var Variable name
-     * @return boolean
-     */
-    public boolean contains(final String var) {
-        return this.list.contains(var);
+        return this.list.indexOf(var);
     }
 }

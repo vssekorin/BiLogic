@@ -6,6 +6,7 @@
 package com.vssekorin.bilogic.code.expression;
 
 import com.vssekorin.bilogic.code.Result;
+import com.vssekorin.bilogic.method.MethodInfo;
 import com.vssekorin.bilogic.util.ChainInsnList;
 import jdk.internal.org.objectweb.asm.tree.JumpInsnNode;
 import jdk.internal.org.objectweb.asm.tree.LabelNode;
@@ -37,12 +38,13 @@ public final class Or implements Expression {
     /**
      * Ctor.
      *
+     * @param information The information
      * @param string Expression text
      */
-    public Or(final String string) {
+    public Or(final MethodInfo information, final String string) {
         this(
             Arrays.stream(string.split("\\s+or\\s+"))
-                .map(SomeExpression::new)
+                .map(item -> new SomeExpression(information, item))
                 .collect(Collectors.toList())
         );
     }
@@ -53,7 +55,10 @@ public final class Or implements Expression {
      * @param first First expression
      * @param second Second expression
      */
-    public Or(final Expression first, final Expression second) {
+    public Or(
+        final Expression first,
+        final Expression second
+    ) {
         this(Arrays.asList(first, second));
     }
 

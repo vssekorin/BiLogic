@@ -3,7 +3,7 @@
  *
  * Copyright (c) 2017 Vseslav Sekorin
  */
-package com.vssekorin.bilogic.code.expression;
+package com.vssekorin.bilogic.code;
 
 import com.vssekorin.bilogic.method.MethodInfo;
 import com.vssekorin.bilogic.util.ChainInsnList;
@@ -12,37 +12,33 @@ import jdk.internal.org.objectweb.asm.tree.VarInsnNode;
 import lombok.AllArgsConstructor;
 import lombok.val;
 
-import static jdk.internal.org.objectweb.asm.Opcodes.*;
+import static jdk.internal.org.objectweb.asm.Opcodes.ALOAD;
+import static jdk.internal.org.objectweb.asm.Opcodes.ARETURN;
+import static jdk.internal.org.objectweb.asm.Opcodes.RETURN;
 
 /**
- * Simple expression.
+ * The end of method.
  *
  * @author Vseslav Sekorin (vssekorin@gmail.com)
  * @version $Id$
  * @since 1.0
  */
 @AllArgsConstructor
-public final class SimpleExpression implements Expression {
+public final class EndDef implements Code {
 
     /**
      * The information about method.
      */
     private final MethodInfo info;
 
-    /**
-     * Expression text.
-     */
-    private final String string;
-
     @Override
     public ChainInsnList asBytecode() {
         val code = new ChainInsnList();
-        switch (this.string) {
-            case "true": code.add(new InsnNode(ICONST_1)); break;
-            case "false": code.add(new InsnNode(ICONST_0)); break;
-            default: code.add(
-                new VarInsnNode(ILOAD, this.info.vars().index(this.string))
-            ); break;
+        if (this.info.name().equals("main")) {
+            code.add(new InsnNode(RETURN));
+        } else {
+            code.add(new VarInsnNode(ALOAD, this.info.vars().index("ret")))
+                .add(new InsnNode(ARETURN));
         }
         return code;
     }

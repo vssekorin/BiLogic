@@ -1,0 +1,12 @@
+def main
+    res1, res2 invoke method
+    out Main: {res1}, {res2}.
+end def
+
+def method
+    in var1, var2
+    out Method: {var1}.
+    ret var2
+    var3 is var1 -> var2
+    ret var3
+end def

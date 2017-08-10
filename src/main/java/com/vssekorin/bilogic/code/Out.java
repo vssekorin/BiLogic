@@ -5,6 +5,7 @@
  */
 package com.vssekorin.bilogic.code;
 
+import com.vssekorin.bilogic.method.MethodInfo;
 import com.vssekorin.bilogic.util.ChainInsnList;
 import com.vssekorin.bilogic.util.CustomObject;
 import jdk.internal.org.objectweb.asm.tree.*;
@@ -24,6 +25,11 @@ import static jdk.internal.org.objectweb.asm.Opcodes.*;
  */
 @AllArgsConstructor
 public final class Out implements Code {
+
+    /**
+     * The information about method.
+     */
+    private final MethodInfo info;
 
     /**
      * The output line.
@@ -61,11 +67,11 @@ public final class Out implements Code {
     private ChainInsnList codeOutput() {
         val code = new ChainInsnList();
         val words = this.line
-            .replace("out", "")
+            .replace("out ", "")
             .trim()
             .split("(?=\\{)|(?<=})");
         Arrays.stream(words)
-            .map(OutElement::new)
+            .map(item -> new OutElement(this.info, item))
             .map(Code::asBytecode)
             .forEach(code::add);
         return code;

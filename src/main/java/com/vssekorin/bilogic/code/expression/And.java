@@ -6,6 +6,7 @@
 package com.vssekorin.bilogic.code.expression;
 
 import com.vssekorin.bilogic.code.Result;
+import com.vssekorin.bilogic.method.MethodInfo;
 import com.vssekorin.bilogic.util.ChainInsnList;
 import jdk.internal.org.objectweb.asm.tree.JumpInsnNode;
 import jdk.internal.org.objectweb.asm.tree.LabelNode;
@@ -29,6 +30,11 @@ import static jdk.internal.org.objectweb.asm.Opcodes.IFEQ;
 public final class And implements Expression {
 
     /**
+     * The information about method.
+     */
+    private final MethodInfo info;
+
+    /**
      * List of operands.
      */
     private final List<Expression> list;
@@ -36,12 +42,14 @@ public final class And implements Expression {
     /**
      * Ctor.
      *
+     * @param information The information
      * @param string Expression text
      */
-    public And(final String string) {
+    public And(final MethodInfo information, final String string) {
         this(
+            information,
             Arrays.stream(string.split("\\s+and\\s+"))
-                .map(SomeExpression::new)
+                .map(item -> new SomeExpression(information, item))
                 .collect(Collectors.toList())
         );
     }

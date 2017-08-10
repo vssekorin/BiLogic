@@ -6,8 +6,8 @@
 package com.vssekorin.bilogic.code;
 
 import com.vssekorin.bilogic.code.expression.SomeExpression;
+import com.vssekorin.bilogic.method.MethodInfo;
 import com.vssekorin.bilogic.util.ChainInsnList;
-import com.vssekorin.bilogic.util.Labels;
 import jdk.internal.org.objectweb.asm.tree.JumpInsnNode;
 import jdk.internal.org.objectweb.asm.tree.LabelNode;
 import lombok.AllArgsConstructor;
@@ -26,6 +26,11 @@ import static jdk.internal.org.objectweb.asm.Opcodes.IFEQ;
 public final class While implements Code {
 
     /**
+     * The information about method.
+     */
+    private final MethodInfo info;
+
+    /**
      * While-do line.
      */
     private final String line;
@@ -38,10 +43,10 @@ public final class While implements Code {
             .trim();
         val start = new LabelNode();
         val ifeq = new LabelNode();
-        Labels.getInstance().add(start, ifeq);
+       this.info.labels().add(start, ifeq);
         return new ChainInsnList()
             .add(start)
-            .add(new SomeExpression(expression).asBytecode())
+            .add(new SomeExpression(this.info, expression).asBytecode())
             .add(new JumpInsnNode(IFEQ, ifeq));
     }
 }

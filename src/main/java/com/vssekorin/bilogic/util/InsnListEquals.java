@@ -14,7 +14,6 @@ import java.util.ListIterator;
 
 /**
  * Equivalence of two InsnList.
- * Technical code.
  *
  * @author Vseslav Sekorin (vssekorin@gmail.com)
  * @version $Id$
