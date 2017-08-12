@@ -13,13 +13,4 @@ package com.vssekorin.bilogic.error;
  * @since 1.0
  */
 public final class RetInMainException extends RuntimeException {
-
-    /**
-     * Ctor.
-     *
-     * @param line Code line
-     */
-    public RetInMainException(final String line) {
-        super("Don't use ret in main method. Line: " + line);
-    }
 }

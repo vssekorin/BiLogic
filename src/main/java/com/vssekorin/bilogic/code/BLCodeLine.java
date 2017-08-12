@@ -48,7 +48,12 @@ public final class BLCodeLine implements Code {
                 case "else": code = new Else(this.info); break;
                 case "while": code = new While(this.info, this.line); break;
                 case "end": code = new End(this.info, this.line); break;
-                case "ret": code = new Ret(this.info, this.line); break;
+                case "ret":
+                    code = new RelevantRet(
+                        this.info,
+                        new Ret(this.info, this.line)
+                    );
+                    break;
                 default: throw new IncorrectLine(line);
             }
         }
