@@ -29,11 +29,11 @@ public final class Main {
         Files.walk(Paths.get(args[0]))
             .parallel()
             .filter(Files::isRegularFile)
-            .filter(item -> item.toString().endsWith(BLCodeFile.EXTENSION))
+            .filter(item -> item.toString().endsWith(BLFile.EXTENSION))
             .map(path ->
                 new JavaClassFile(
                     path,
-                    new BLCodeFile(path).asMetodList()
+                    new BLCode(path).asMetodList()
                 )
             )
             .forEach(JavaClass::save);

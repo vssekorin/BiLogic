@@ -55,7 +55,7 @@ public final class JavaClassFile implements JavaClass {
      */
     private ClassNode header(final ClassNode node) {
         node.access = ACC_PUBLIC + ACC_SUPER;
-        node.name = BLCodeFile.className(this.path);
+        node.name = new BLFile(this.path).name();
         node.superName = "java/lang/Object";
         node.version = V1_8;
         return node;
@@ -70,6 +70,6 @@ public final class JavaClassFile implements JavaClass {
         return this.path
             .toAbsolutePath()
             .toString()
-            .replace(BLCodeFile.EXTENSION, ".class");
+            .replace(BLFile.EXTENSION, ".class");
     }
 }

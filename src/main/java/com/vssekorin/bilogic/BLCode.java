@@ -17,24 +17,18 @@ import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Optional;
 
 import static java.util.stream.Collectors.toList;
 
 /**
- * BiLogic code file.
+ * BiLogic code.
  *
  * @author Vseslav Sekorin (vssekorin@gmail.com)
  * @version $Id$
  * @since 1.0
  */
 @AllArgsConstructor
-public final class BLCodeFile {
-
-    /**
-     * The extension of files with BiLogic code.
-     */
-    public static final String EXTENSION = ".bilog";
+public final class BLCode {
 
     /**
      * The path of file.
@@ -62,7 +56,7 @@ public final class BLCodeFile {
         }
         methods.entrySet().stream()
             .map(item -> new SomeMethod(
-                BLCodeFile.className(this.path),
+                new BLFile(this.path).name(),
                 item.getKey(),
                 item.getValue()
             ))
@@ -83,19 +77,5 @@ public final class BLCodeFile {
             .filter(str -> !str.isEmpty())
             .filter(str -> !str.startsWith("--"))
             .collect(toList());
-    }
-
-    /**
-     * Class name of files.
-     *
-     * @param path The path of file
-     * @return The name
-     */
-    public static String className(final Path path) {
-        return Optional.ofNullable(path)
-            .map(Path::getFileName)
-            .map(Path::toString)
-            .map(item -> item.replace(BLCodeFile.EXTENSION, ""))
-            .orElseThrow(IllegalArgumentException::new);
     }
 }
