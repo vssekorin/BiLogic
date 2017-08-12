@@ -1,12 +1,25 @@
 def main
-    res1, res2 invoke method
+    res1, res2 invoke method1
     out Main: {res1}, {res2}.
+    res3, _, res4 invoke method2 false res1
+    out {res3} {res4}
 end def
 
-def method
+def method1
     in var1, var2
     out Method: {var1}.
     ret var2
     var3 is var1 -> var2
     ret var3
+end def
+
+def method2 arg1 arg2
+    if not arg1 then
+        out Start
+    else
+        panic arg1 is true
+    end if
+    ret arg1 and arg2
+    ret arg1 or arg2
+    ret arg1 -> arg2
 end def

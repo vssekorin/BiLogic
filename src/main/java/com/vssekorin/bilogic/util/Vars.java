@@ -48,7 +48,7 @@ public final class Vars {
      * @param var Variable name
      */
     public void add(final String var) {
-        if (!this.list.contains(var)) {
+        if (!var.equals("_") && !this.list.contains(var)) {
             this.list.add(var);
         }
     }
@@ -60,9 +60,14 @@ public final class Vars {
      * @return Index
      */
     public int index(final String var) {
-        if (!this.list.contains(var)) {
+        final int result;
+        if (var.equals("_")) {
+            result = -1;
+        } else if (!this.list.contains(var)) {
             throw new UnknownVariable(var);
+        } else {
+            result = this.list.indexOf(var);
         }
-        return this.list.indexOf(var);
+        return result;
     }
 }

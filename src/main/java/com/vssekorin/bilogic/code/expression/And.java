@@ -30,11 +30,6 @@ import static jdk.internal.org.objectweb.asm.Opcodes.IFEQ;
 public final class And implements Expression {
 
     /**
-     * The information about method.
-     */
-    private final MethodInfo info;
-
-    /**
      * List of operands.
      */
     private final List<Expression> list;
@@ -47,7 +42,6 @@ public final class And implements Expression {
      */
     public And(final MethodInfo information, final String string) {
         this(
-            information,
             Arrays.stream(string.split("\\s+and\\s+"))
                 .map(item -> new SomeExpression(information, item))
                 .collect(Collectors.toList())

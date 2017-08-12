@@ -6,7 +6,6 @@
 package com.vssekorin.bilogic.code;
 
 import com.vssekorin.bilogic.code.expression.SomeExpression;
-import com.vssekorin.bilogic.error.RetInMainException;
 import com.vssekorin.bilogic.method.MethodInfo;
 import com.vssekorin.bilogic.util.ChainInsnList;
 import jdk.internal.org.objectweb.asm.tree.InsnNode;
@@ -38,9 +37,6 @@ public final class Ret implements Code {
 
     @Override
     public ChainInsnList asBytecode() {
-        if (this.info.name().equals("main")) {
-            throw new RetInMainException(this.line);
-        }
         return new ChainInsnList()
             .add(new VarInsnNode(ALOAD, this.info.vars().index("ret")))
             .add(new SomeExpression(

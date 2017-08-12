@@ -11,7 +11,6 @@ import com.vssekorin.bilogic.method.MethodInfo;
 import com.vssekorin.bilogic.util.ChainInsnList;
 import com.vssekorin.bilogic.util.VarList;
 import jdk.internal.org.objectweb.asm.tree.MethodInsnNode;
-import jdk.internal.org.objectweb.asm.tree.TypeInsnNode;
 import jdk.internal.org.objectweb.asm.tree.VarInsnNode;
 import lombok.AllArgsConstructor;
 import lombok.val;
@@ -44,10 +43,11 @@ public final class Invoke implements Code {
     @Override
     public ChainInsnList asBytecode() {
         val code = new ChainInsnList();
-        val words = line.split("\\s+invoke\\s+");
+        val words = this.line.split("\\s+invoke\\s+");
         val varsIndex = new VarList(this.info, words[0]).asIndexList();
         val invoke = Arrays.asList(words[1].split("\\s+"));
         val method = invoke.get(0);
+        val invokeIndex = this.info.vars().index("invoke");
         invoke.subList(1, invoke.size()).stream()
             .map(item -> new SimpleExpression(this.info, item))
             .map(Expression::asBytecode)
@@ -61,26 +61,13 @@ public final class Invoke implements Code {
                 Collections.nCopies(invoke.size() - 1, "Z")
             ) + ")Ljava/util/List;",
             false))
-            .add(new VarInsnNode(ASTORE, this.info.vars().index("invoke")));
+            .add(new VarInsnNode(ASTORE, invokeIndex));
         for (int i = 0; i < varsIndex.size(); i++) {
-            code.add(new VarInsnNode(ALOAD, this.info.vars().index("invoke")))
-                .add(new PushInt(i).asBytecode())
-                .add(new MethodInsnNode(
-                    INVOKEINTERFACE,
-                    "java/util/List",
-                    "get",
-                    "(I)Ljava/lang/Object;",
-                    true
-                ))
-                .add(new TypeInsnNode(CHECKCAST, "java/lang/Boolean"))
-                .add(new MethodInsnNode(
-                    INVOKEVIRTUAL,
-                    "java/lang/Boolean",
-                    "booleanValue",
-                    "()Z",
-                    false
-                ))
-                .add(new VarInsnNode(ISTORE, varsIndex.get(i)));
+            val index = varsIndex.get(i);
+            if (index != -1) {
+                code.add(new RetValue(invokeIndex, i).asBytecode())
+                    .add(new VarInsnNode(ISTORE, index));
+            }
         }
         return code;
     }
