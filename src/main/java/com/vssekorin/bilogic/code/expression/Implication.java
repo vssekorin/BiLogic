@@ -7,6 +7,7 @@ package com.vssekorin.bilogic.code.expression;
 
 import com.vssekorin.bilogic.method.MethodInfo;
 import com.vssekorin.bilogic.util.ChainInsnList;
+import com.vssekorin.bilogic.util.FramedString;
 import lombok.AllArgsConstructor;
 
 /**
@@ -18,6 +19,11 @@ import lombok.AllArgsConstructor;
  */
 @AllArgsConstructor
 public final class Implication implements Expression {
+
+    /**
+     * The name.
+     */
+    public static final String NAME = "->";
 
     /**
      * The first operand.
@@ -38,8 +44,8 @@ public final class Implication implements Expression {
     public Implication(final MethodInfo information, final String string) {
         this(
             information,
-            string.split("\\s+->\\s+", 2)[0],
-            string.split("\\s+->\\s+", 2)[1]
+            string.split(new FramedString(Implication.NAME).text(), 2)[0],
+            string.split(new FramedString(Implication.NAME).text(), 2)[1]
         );
     }
 

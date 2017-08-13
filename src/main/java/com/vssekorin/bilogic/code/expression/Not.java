@@ -26,6 +26,11 @@ import static jdk.internal.org.objectweb.asm.Opcodes.IFNE;
 public final class Not implements Expression {
 
     /**
+     * The name.
+     */
+    public static final String NAME = "not";
+
+    /**
      * The expression.
      */
     private final Expression expression;
@@ -40,7 +45,7 @@ public final class Not implements Expression {
         this(
             new SimpleExpression(
                 information,
-                string.replace("not", "").trim()
+                string.substring(Not.NAME.length()).trim()
             )
         );
     }

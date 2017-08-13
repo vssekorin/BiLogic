@@ -37,7 +37,10 @@ public final class CompoundExpression implements Expression {
      * List of operations.
      */
     private static final List<String> OPERATIONS = Arrays.asList(
-        " -> ", " or ", " and ", "not "
+        " " + Implication.NAME + " ",
+        " " + Or.NAME + " ",
+        " " + And.NAME + " ",
+        Not.NAME + " "
     );
 
     @Override

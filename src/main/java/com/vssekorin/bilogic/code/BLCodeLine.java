@@ -37,18 +37,18 @@ public final class BLCodeLine implements Code {
     public ChainInsnList asBytecode() {
         val words = Arrays.asList(this.line.split("\\s+"));
         final Code code;
-        if (words.contains("is") || words.contains("invoke")) {
+        if (words.contains(Is.NAME) || words.contains(Invoke.NAME)) {
             code = new Assignment(this.info, this.line);
         } else {
             switch (words.get(0)) {
-                case "in": code = new In(this.info, this.line); break;
-                case "out": code = new Out(this.info, this.line); break;
-                case "panic": code = new Panic(line); break;
-                case "if": code = new If(this.info, this.line); break;
-                case "else": code = new Else(this.info); break;
-                case "while": code = new While(this.info, this.line); break;
-                case "end": code = new End(this.info, this.line); break;
-                case "ret":
+                case In.NAME: code = new In(this.info, this.line); break;
+                case Out.NAME: code = new Out(this.info, this.line); break;
+                case Panic.NAME: code = new Panic(this.line); break;
+                case If.NAME: code = new If(this.info, this.line); break;
+                case Else.NAME: code = new Else(this.info); break;
+                case While.NAME: code = new While(this.info, this.line); break;
+                case End.NAME: code = new End(this.info, this.line); break;
+                case Ret.NAME:
                     code = new RelevantRet(
                         this.info,
                         new Ret(this.info, this.line)

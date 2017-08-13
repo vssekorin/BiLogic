@@ -5,6 +5,8 @@
  */
 package com.vssekorin.bilogic.method;
 
+import com.vssekorin.bilogic.code.In;
+import com.vssekorin.bilogic.code.Invoke;
 import jdk.internal.org.objectweb.asm.tree.MethodNode;
 import lombok.AllArgsConstructor;
 import lombok.val;
@@ -23,14 +25,19 @@ import java.util.List;
 public final class SomeMethod implements Method {
 
     /**
+     * The name.
+     */
+    public static final String NAME = "def";
+
+    /**
      * The name of class.
      */
-    private final String className;
+    private final String klass;
 
     /**
      * The name of method.
      */
-    private final String name;
+    private final String method;
 
     /**
      * The method body.
@@ -39,20 +46,20 @@ public final class SomeMethod implements Method {
 
     @Override
     public MethodNode asMethodNode() {
-        final Method method;
-        val header = this.name.split("\\s+");
+        final Method node;
+        val header = this.method.split("\\s+");
         val info = new MethodInfo(
-            this.className,
+            this.klass,
             header[0],
             Arrays.copyOfRange(header, 1, header.length)
         );
-        info.vars().add("in");
-        info.vars().add("invoke");
-        if (info.name().equals("main")) {
-            method = new MainMethod(info, body);
+        info.vars().add(In.NAME);
+        info.vars().add(Invoke.NAME);
+        if (info.name().equals(MainMethod.NAME)) {
+            node = new MainMethod(info, body);
         } else {
-            method = new CommonMethod(info, body);
+            node = new CommonMethod(info, body);
         }
-        return method.asMethodNode();
+        return node.asMethodNode();
     }
 }

@@ -24,6 +24,11 @@ import static jdk.internal.org.objectweb.asm.Opcodes.GOTO;
 public final class Else implements Code {
 
     /**
+     * The name.
+     */
+    public static final String NAME = "else";
+
+    /**
      * The information about method.
      */
     private final MethodInfo info;

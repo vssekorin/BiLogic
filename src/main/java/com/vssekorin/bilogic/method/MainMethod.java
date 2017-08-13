@@ -25,6 +25,11 @@ import static jdk.internal.org.objectweb.asm.Opcodes.ACC_STATIC;
 public final class MainMethod implements Method {
 
     /**
+     * The name.
+     */
+    public static final String NAME = "main";
+
+    /**
      * The information about method.
      */
     private final MethodInfo info;
@@ -38,7 +43,7 @@ public final class MainMethod implements Method {
     public MethodNode asMethodNode() {
         MethodNode node = new MethodNode(
             ACC_PUBLIC + ACC_STATIC,
-            "main",
+            MainMethod.NAME,
             "([Ljava/lang/String;)V",
             null,
             null

@@ -5,6 +5,7 @@
  */
 package com.vssekorin.bilogic.method;
 
+import com.vssekorin.bilogic.code.Ret;
 import com.vssekorin.bilogic.util.ChainInsnList;
 import com.vssekorin.bilogic.util.CustomObject;
 import jdk.internal.org.objectweb.asm.tree.InsnList;
@@ -52,11 +53,11 @@ public final class CommonMethod implements Method {
         );
         InsnList instructions = node.instructions;
         val ret = new CustomObject("java/util/ArrayList");
-        this.info.vars().add("ret");
+        this.info.vars().add(Ret.NAME);
         val code = new ChainInsnList()
             .add(ret.codeNew())
             .add(ret.codeInit("()V"))
-            .add(new VarInsnNode(ASTORE, this.info.vars().index("ret")))
+            .add(new VarInsnNode(ASTORE, this.info.vars().index(Ret.NAME)))
             .add(new MethodBody(this.info, this.body).asBytecode())
             .getInsnList();
         instructions.add(code);

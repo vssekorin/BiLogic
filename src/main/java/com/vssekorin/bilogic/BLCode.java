@@ -45,8 +45,10 @@ public final class BLCode {
         val methods = new HashMap<String, List<String>>();
         String header = "";
         for (final String line : this.pureCode()) {
-            if (line.startsWith("def ")) {
-                header = line.substring("def".length()).trim();
+            if (line.startsWith(SomeMethod.NAME + " ")) {
+                header = line
+                    .substring(SomeMethod.NAME.length())
+                    .trim();
                 methods.put(header, new ArrayList<>());
             } else {
                 val body = methods.get(header);

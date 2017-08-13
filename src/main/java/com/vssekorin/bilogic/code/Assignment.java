@@ -32,7 +32,7 @@ public final class Assignment implements Code {
     @Override
     public ChainInsnList asBytecode() {
         final Code code;
-        if (this.line.contains(" is ")) {
+        if (this.line.contains(" " + Is.NAME + " ")) {
             code = new Is(this.info, this.line);
         } else {
             code = new Invoke(this.info, this.line);

@@ -27,6 +27,11 @@ import static jdk.internal.org.objectweb.asm.Opcodes.*;
 public final class Out implements Code {
 
     /**
+     * The name.
+     */
+    public static final String NAME = "out";
+
+    /**
      * The information about method.
      */
     private final MethodInfo info;
@@ -67,7 +72,7 @@ public final class Out implements Code {
     private ChainInsnList codeOutput() {
         val code = new ChainInsnList();
         val words = this.line
-            .replace("out ", "")
+            .substring(Out.NAME.length())
             .trim()
             .split("(?=\\{)|(?<=})");
         Arrays.stream(words)

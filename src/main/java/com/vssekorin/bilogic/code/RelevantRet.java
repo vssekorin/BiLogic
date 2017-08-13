@@ -6,6 +6,7 @@
 package com.vssekorin.bilogic.code;
 
 import com.vssekorin.bilogic.error.RetInMainException;
+import com.vssekorin.bilogic.method.MainMethod;
 import com.vssekorin.bilogic.method.MethodInfo;
 import com.vssekorin.bilogic.util.ChainInsnList;
 import lombok.AllArgsConstructor;
@@ -32,7 +33,7 @@ public final class RelevantRet implements Code {
 
     @Override
     public ChainInsnList asBytecode() {
-        if (this.info.name().equals("main")) {
+        if (this.info.name().equals(MainMethod.NAME)) {
             throw new RetInMainException();
         }
         return this.origin.asBytecode();
