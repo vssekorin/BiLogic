@@ -44,7 +44,7 @@ public final class If implements Code {
     public ChainInsnList asBytecode() {
         val expression = this.line
             .substring(If.NAME.length())
-            .replaceAll("\\s+then$", "")
+            .replaceAll("then$", "")
             .trim();
         val ifeq = new LabelNode();
         val end = new LabelNode();

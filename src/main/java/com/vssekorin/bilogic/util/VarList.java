@@ -11,6 +11,7 @@ import lombok.AllArgsConstructor;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 /**
  * List of variables.
@@ -38,9 +39,20 @@ public final class VarList {
      * @return List of indexes
      */
     public List<Integer> asIndexList() {
+        return this.asIndexStream()
+            .boxed()
+            .collect(Collectors.toList());
+    }
+
+    /**
+     * Convert to stream of variables index.
+     *
+     * @return Stream of indexes
+     */
+    public IntStream asIndexStream() {
         return Arrays.stream(string.split(",\\s+"))
             .peek(this.info.vars()::add)
             .map(this.info.vars()::index)
-            .collect(Collectors.toList());
+            .mapToInt(Integer::intValue);
     }
 }

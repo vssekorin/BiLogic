@@ -43,13 +43,13 @@ public final class And implements Expression {
     /**
      * Ctor.
      *
-     * @param information The information
+     * @param info The information
      * @param string Expression text
      */
-    public And(final MethodInfo information, final String string) {
+    public And(final MethodInfo info, final String string) {
         this(
             Arrays.stream(string.split(new FramedString(And.NAME).text()))
-                .map(item -> new SomeExpression(information, item))
+                .map(item -> new SomeExpression(info, item))
                 .collect(Collectors.toList())
         );
     }
@@ -59,9 +59,9 @@ public final class And implements Expression {
         val code = new ChainInsnList();
         val ifeq = new LabelNode();
         val end = new LabelNode();
-        for (Expression exp : this.list) {
-            code.add(exp.asBytecode());
-            code.add(new JumpInsnNode(IFEQ, ifeq));
+        for (final Expression exp : this.list) {
+            code.add(exp.asBytecode())
+                .add(new JumpInsnNode(IFEQ, ifeq));
         }
         code.add(new Result(ifeq, end).asBytecode());
         return code;

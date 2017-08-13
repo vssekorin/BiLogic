@@ -40,9 +40,11 @@ public final class SimpleExpression implements Expression {
         switch (this.string) {
             case "true": code.add(new InsnNode(ICONST_1)); break;
             case "false": code.add(new InsnNode(ICONST_0)); break;
-            default: code.add(
-                new VarInsnNode(ILOAD, this.info.vars().index(this.string))
-            ); break;
+            default:
+                code.add(new VarInsnNode(
+                    ILOAD,
+                    this.info.vars().index(this.string)
+                ));
         }
         return code;
     }

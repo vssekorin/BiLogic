@@ -44,13 +44,13 @@ public final class Or implements Expression {
     /**
      * Ctor.
      *
-     * @param information The information
+     * @param info The information
      * @param string Expression text
      */
-    public Or(final MethodInfo information, final String string) {
+    public Or(final MethodInfo info, final String string) {
         this(
             Arrays.stream(string.split(new FramedString(Or.NAME).text()))
-                .map(item -> new SomeExpression(information, item))
+                .map(item -> new SomeExpression(info, item))
                 .collect(Collectors.toList())
         );
     }
@@ -77,10 +77,10 @@ public final class Or implements Expression {
         val indexLast = this.list.size() - 1;
         this.list.stream()
             .limit(indexLast)
-            .forEach(exp -> {
-                code.add(exp.asBytecode());
-                code.add(new JumpInsnNode(IFNE, ifne));
-            });
+            .forEach(exp -> code
+                .add(exp.asBytecode())
+                .add(new JumpInsnNode(IFNE, ifne))
+            );
         return code
             .add(this.list.get(indexLast).asBytecode())
             .add(new JumpInsnNode(IFEQ, ifeq))

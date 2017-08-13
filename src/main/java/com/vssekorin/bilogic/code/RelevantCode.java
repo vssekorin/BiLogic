@@ -5,8 +5,7 @@
  */
 package com.vssekorin.bilogic.code;
 
-import com.vssekorin.bilogic.error.RetInMainException;
-import com.vssekorin.bilogic.method.MainMethod;
+import com.vssekorin.bilogic.error.RelevantOperationException;
 import com.vssekorin.bilogic.method.MethodInfo;
 import com.vssekorin.bilogic.util.ChainInsnList;
 import lombok.AllArgsConstructor;
@@ -19,7 +18,7 @@ import lombok.AllArgsConstructor;
  * @since 1.0
  */
 @AllArgsConstructor
-public final class RelevantRet implements Code {
+public final class RelevantCode implements Code {
 
     /**
      * The information about method.
@@ -27,14 +26,19 @@ public final class RelevantRet implements Code {
     private final MethodInfo info;
 
     /**
-     * The origin Ret.
+     * The origin Code.
      */
-    private final Ret origin;
+    private final Code origin;
+
+    /**
+     * The method name.
+     */
+    private final String method;
 
     @Override
     public ChainInsnList asBytecode() {
-        if (this.info.name().equals(MainMethod.NAME)) {
-            throw new RetInMainException();
+        if (this.info.name().equals(this.method)) {
+            throw new RelevantOperationException(this.method);
         }
         return this.origin.asBytecode();
     }

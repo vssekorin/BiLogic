@@ -5,7 +5,7 @@
  */
 package com.vssekorin.bilogic.code;
 
-import com.vssekorin.bilogic.error.IncorrectLine;
+import com.vssekorin.bilogic.error.IncorrectLineException;
 import com.vssekorin.bilogic.method.MethodInfo;
 import com.vssekorin.bilogic.method.SomeMethod;
 import com.vssekorin.bilogic.util.ChainInsnList;
@@ -45,7 +45,7 @@ public final class End implements Code {
             case If.NAME: code = new EndIf(this.info); break;
             case While.NAME: code = new EndWhile(this.info); break;
             case SomeMethod.NAME: code = new EndDef(this.info); break;
-            default: throw new IncorrectLine(line);
+            default: throw new IncorrectLineException(this.line);
         }
         return code.asBytecode();
     }

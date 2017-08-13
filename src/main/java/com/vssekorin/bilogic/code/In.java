@@ -55,12 +55,14 @@ public final class In implements Code {
             .add(scanner.codeInit("(Ljava/io/InputStream;)V"))
             .add(new VarInsnNode(ASTORE, this.info.vars().index(In.NAME)));
         val vars = this.line.substring(In.NAME.length()).trim();
-        val varsIndex = new VarList(this.info, vars).asIndexList();
-        for (int index : varsIndex) {
-            code.add(new VarInsnNode(ALOAD, this.info.vars().index(In.NAME)))
+        new VarList(this.info, vars)
+            .asIndexStream()
+            .mapToObj(i -> new VarInsnNode(ISTORE, i))
+            .forEach(node -> code
+                .add(new VarInsnNode(ALOAD, this.info.vars().index(In.NAME)))
                 .add(scanner.codeMethod("nextBoolean", "()Z"))
-                .add(new VarInsnNode(ISTORE, index));
-        }
+                .add(node)
+            );
         return code;
     }
 }

@@ -38,12 +38,12 @@ public final class Implication implements Expression {
     /**
      * Ctor.
      *
-     * @param information The information
+     * @param info The information
      * @param string Expression text
      */
-    public Implication(final MethodInfo information, final String string) {
+    public Implication(final MethodInfo info, final String string) {
         this(
-            information,
+            info,
             string.split(new FramedString(Implication.NAME).text(), 2)[0],
             string.split(new FramedString(Implication.NAME).text(), 2)[1]
         );
@@ -52,18 +52,15 @@ public final class Implication implements Expression {
     /**
      * Ctor.
      *
-     * @param information The information
+     * @param info The information
      * @param firstExp Expression text of first operand
      * @param secondExp Expression text of second operand
      */
     public Implication(
-        final MethodInfo information,
-        final String firstExp,
-        final String secondExp
-    ) {
+        final MethodInfo info, final String firstExp, final String secondExp) {
         this(
-            new SomeExpression(information, firstExp),
-            new SomeExpression(information, secondExp)
+            new SomeExpression(info, firstExp),
+            new SomeExpression(info, secondExp)
         );
     }
 

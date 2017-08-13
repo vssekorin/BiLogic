@@ -44,7 +44,7 @@ public final class While implements Code {
     public ChainInsnList asBytecode() {
         val expression = this.line
             .substring(While.NAME.length())
-            .replaceAll("\\s+do$", "")
+            .replaceAll("do$", "")
             .trim();
         val start = new LabelNode();
         val ifeq = new LabelNode();

@@ -56,9 +56,9 @@ public final class SomeMethod implements Method {
         info.vars().add(In.NAME);
         info.vars().add(Invoke.NAME);
         if (info.name().equals(MainMethod.NAME)) {
-            node = new MainMethod(info, body);
+            node = new MainMethod(info, this.body);
         } else {
-            node = new CommonMethod(info, body);
+            node = new CommonMethod(info, this.body);
         }
         return node.asMethodNode();
     }
