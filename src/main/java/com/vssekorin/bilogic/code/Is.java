@@ -8,6 +8,7 @@ package com.vssekorin.bilogic.code;
 import com.vssekorin.bilogic.code.expression.SomeExpression;
 import com.vssekorin.bilogic.method.MethodInfo;
 import com.vssekorin.bilogic.util.ChainInsnList;
+import com.vssekorin.bilogic.util.FramedString;
 import com.vssekorin.bilogic.util.VarList;
 import jdk.internal.org.objectweb.asm.tree.VarInsnNode;
 import lombok.AllArgsConstructor;
@@ -26,6 +27,11 @@ import static jdk.internal.org.objectweb.asm.Opcodes.ISTORE;
 public final class Is implements Code {
 
     /**
+     * The name.
+     */
+    public static final String NAME = "is";
+
+    /**
      * The information about method.
      */
     private final MethodInfo info;
@@ -38,7 +44,7 @@ public final class Is implements Code {
     @Override
     public ChainInsnList asBytecode() {
         val code = new ChainInsnList();
-        val words = this.line.split("\\s+is\\s+");
+        val words = this.line.split(new FramedString(Is.NAME).text());
         val varsIndex = new VarList(this.info, words[0]).asIndexList();
         val expression = new SomeExpression(this.info, words[1]);
         for (final int index : varsIndex) {

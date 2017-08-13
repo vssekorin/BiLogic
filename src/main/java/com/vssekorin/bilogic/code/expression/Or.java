@@ -8,6 +8,7 @@ package com.vssekorin.bilogic.code.expression;
 import com.vssekorin.bilogic.code.Result;
 import com.vssekorin.bilogic.method.MethodInfo;
 import com.vssekorin.bilogic.util.ChainInsnList;
+import com.vssekorin.bilogic.util.FramedString;
 import jdk.internal.org.objectweb.asm.tree.JumpInsnNode;
 import jdk.internal.org.objectweb.asm.tree.LabelNode;
 import lombok.AllArgsConstructor;
@@ -31,6 +32,11 @@ import static jdk.internal.org.objectweb.asm.Opcodes.IFNE;
 public final class Or implements Expression {
 
     /**
+     * The name.
+     */
+    public static final String NAME = "or";
+
+    /**
      * List of expressions.
      */
     private final List<Expression> list;
@@ -43,7 +49,7 @@ public final class Or implements Expression {
      */
     public Or(final MethodInfo information, final String string) {
         this(
-            Arrays.stream(string.split("\\s+or\\s+"))
+            Arrays.stream(string.split(new FramedString(Or.NAME).text()))
                 .map(item -> new SomeExpression(information, item))
                 .collect(Collectors.toList())
         );

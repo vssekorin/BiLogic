@@ -26,6 +26,11 @@ import static jdk.internal.org.objectweb.asm.Opcodes.IFEQ;
 public final class If implements Code {
 
     /**
+     * The name.
+     */
+    public static final String NAME = "if";
+
+    /**
      * The information about method.
      */
     private final MethodInfo info;
@@ -37,9 +42,9 @@ public final class If implements Code {
 
     @Override
     public ChainInsnList asBytecode() {
-        val expression = line
-            .replace("if", "")
-            .replace("then", "")
+        val expression = this.line
+            .substring(If.NAME.length())
+            .replaceAll("\\s+then$", "")
             .trim();
         val ifeq = new LabelNode();
         val end = new LabelNode();

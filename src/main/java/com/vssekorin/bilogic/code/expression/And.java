@@ -8,6 +8,7 @@ package com.vssekorin.bilogic.code.expression;
 import com.vssekorin.bilogic.code.Result;
 import com.vssekorin.bilogic.method.MethodInfo;
 import com.vssekorin.bilogic.util.ChainInsnList;
+import com.vssekorin.bilogic.util.FramedString;
 import jdk.internal.org.objectweb.asm.tree.JumpInsnNode;
 import jdk.internal.org.objectweb.asm.tree.LabelNode;
 import lombok.AllArgsConstructor;
@@ -30,6 +31,11 @@ import static jdk.internal.org.objectweb.asm.Opcodes.IFEQ;
 public final class And implements Expression {
 
     /**
+     * The name.
+     */
+    public static final String NAME = "and";
+
+    /**
      * List of operands.
      */
     private final List<Expression> list;
@@ -42,7 +48,7 @@ public final class And implements Expression {
      */
     public And(final MethodInfo information, final String string) {
         this(
-            Arrays.stream(string.split("\\s+and\\s+"))
+            Arrays.stream(string.split(new FramedString(And.NAME).text()))
                 .map(item -> new SomeExpression(information, item))
                 .collect(Collectors.toList())
         );

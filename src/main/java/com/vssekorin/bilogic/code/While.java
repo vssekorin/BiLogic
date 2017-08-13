@@ -26,6 +26,11 @@ import static jdk.internal.org.objectweb.asm.Opcodes.IFEQ;
 public final class While implements Code {
 
     /**
+     * The name.
+     */
+    public static final String NAME = "while";
+
+    /**
      * The information about method.
      */
     private final MethodInfo info;
@@ -37,9 +42,9 @@ public final class While implements Code {
 
     @Override
     public ChainInsnList asBytecode() {
-        val expression = line
-            .replace("while", "")
-            .replace("do", "")
+        val expression = this.line
+            .substring(While.NAME.length())
+            .replaceAll("\\s+do$", "")
             .trim();
         val start = new LabelNode();
         val ifeq = new LabelNode();

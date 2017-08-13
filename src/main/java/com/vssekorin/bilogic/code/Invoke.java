@@ -9,6 +9,7 @@ import com.vssekorin.bilogic.code.expression.Expression;
 import com.vssekorin.bilogic.code.expression.SimpleExpression;
 import com.vssekorin.bilogic.method.MethodInfo;
 import com.vssekorin.bilogic.util.ChainInsnList;
+import com.vssekorin.bilogic.util.FramedString;
 import com.vssekorin.bilogic.util.VarList;
 import jdk.internal.org.objectweb.asm.tree.MethodInsnNode;
 import jdk.internal.org.objectweb.asm.tree.VarInsnNode;
@@ -31,6 +32,11 @@ import static jdk.internal.org.objectweb.asm.Opcodes.*;
 public final class Invoke implements Code {
 
     /**
+     * The name.
+     */
+    public static final String NAME = "invoke";
+
+    /**
      * The information about method.
      */
     private final MethodInfo info;
@@ -43,11 +49,11 @@ public final class Invoke implements Code {
     @Override
     public ChainInsnList asBytecode() {
         val code = new ChainInsnList();
-        val words = this.line.split("\\s+invoke\\s+");
+        val words = this.line.split(new FramedString(Invoke.NAME).text());
         val varsIndex = new VarList(this.info, words[0]).asIndexList();
         val invoke = Arrays.asList(words[1].split("\\s+"));
         val method = invoke.get(0);
-        val invokeIndex = this.info.vars().index("invoke");
+        val invokeIndex = this.info.vars().index(Invoke.NAME);
         invoke.subList(1, invoke.size()).stream()
             .map(item -> new SimpleExpression(this.info, item))
             .map(Expression::asBytecode)

@@ -25,6 +25,11 @@ import static jdk.internal.org.objectweb.asm.Opcodes.*;
 public final class Panic implements Code {
 
     /**
+     * The name.
+     */
+    public static final String NAME = "panic";
+
+    /**
      * Line that throw exception.
      */
     private final String line;
@@ -32,7 +37,7 @@ public final class Panic implements Code {
     @Override
     public ChainInsnList asBytecode() {
         val exception = new CustomObject("java/lang/RuntimeException");
-        val message = this.line.replace("panic", "").trim();
+        val message = this.line.substring(Panic.NAME.length()).trim();
         return new ChainInsnList()
             .add(exception.codeNew())
             .add(new LdcInsnNode(message))

@@ -21,6 +21,11 @@ import java.util.List;
 public final class Vars {
 
     /**
+     * Ignore variable.
+     */
+    private static final String IGNORED = "_";
+
+    /**
      * List of variables name.
      */
     private final List<String> list;
@@ -48,7 +53,7 @@ public final class Vars {
      * @param var Variable name
      */
     public void add(final String var) {
-        if (!var.equals("_") && !this.list.contains(var)) {
+        if (!var.equals(Vars.IGNORED) && !this.list.contains(var)) {
             this.list.add(var);
         }
     }
@@ -61,7 +66,7 @@ public final class Vars {
      */
     public int index(final String var) {
         final int result;
-        if (var.equals("_")) {
+        if (var.equals(Vars.IGNORED)) {
             result = -1;
         } else if (!this.list.contains(var)) {
             throw new UnknownVariable(var);

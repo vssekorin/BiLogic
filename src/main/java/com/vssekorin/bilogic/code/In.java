@@ -27,6 +27,11 @@ import static jdk.internal.org.objectweb.asm.Opcodes.*;
 public final class In implements Code {
 
     /**
+     * The name.
+     */
+    public static final String NAME = "in";
+
+    /**
      * The information about method.
      */
     private final MethodInfo info;
@@ -48,11 +53,11 @@ public final class In implements Code {
                 "Ljava/io/InputStream;"
             ))
             .add(scanner.codeInit("(Ljava/io/InputStream;)V"))
-            .add(new VarInsnNode(ASTORE, this.info.vars().index("in")));
-        val vars = this.line.replace("in ", "").trim();
+            .add(new VarInsnNode(ASTORE, this.info.vars().index(In.NAME)));
+        val vars = this.line.substring(In.NAME.length()).trim();
         val varsIndex = new VarList(this.info, vars).asIndexList();
         for (int index : varsIndex) {
-            code.add(new VarInsnNode(ALOAD, this.info.vars().index("in")))
+            code.add(new VarInsnNode(ALOAD, this.info.vars().index(In.NAME)))
                 .add(scanner.codeMethod("nextBoolean", "()Z"))
                 .add(new VarInsnNode(ISTORE, index));
         }

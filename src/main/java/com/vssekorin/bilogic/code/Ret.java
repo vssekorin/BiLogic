@@ -26,6 +26,11 @@ import static jdk.internal.org.objectweb.asm.Opcodes.*;
 public final class Ret implements Code {
 
     /**
+     * The name.
+     */
+    public static final String NAME = "ret";
+
+    /**
      * The information about method.
      */
     private final MethodInfo info;
@@ -38,10 +43,10 @@ public final class Ret implements Code {
     @Override
     public ChainInsnList asBytecode() {
         return new ChainInsnList()
-            .add(new VarInsnNode(ALOAD, this.info.vars().index("ret")))
+            .add(new VarInsnNode(ALOAD, this.info.vars().index(Ret.NAME)))
             .add(new SomeExpression(
                 this.info,
-                this.line.replace("ret", "").trim()
+                this.line.substring(Ret.NAME.length()).trim()
             ).asBytecode())
             .add(new MethodInsnNode(
                 INVOKESTATIC,
