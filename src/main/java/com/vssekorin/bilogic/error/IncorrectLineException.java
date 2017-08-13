@@ -12,14 +12,14 @@ package com.vssekorin.bilogic.error;
  * @version $Id$
  * @since 1.0
  */
-public final class IncorrectLine extends RuntimeException {
+public final class IncorrectLineException extends RuntimeException {
 
     /**
      * Ctor.
      *
      * @param line Code line
      */
-    public IncorrectLine(final String line) {
+    public IncorrectLineException(final String line) {
         super("Incorrect code line: " + line);
     }
 }

@@ -12,14 +12,14 @@ package com.vssekorin.bilogic.error;
  * @version $Id$
  * @since 1.0
  */
-public final class UnknownVariable extends RuntimeException {
+public final class UnknownVariableException extends RuntimeException {
 
     /**
      * Ctor.
      *
      * @param var Variable name
      */
-    public UnknownVariable(final String var) {
+    public UnknownVariableException(final String var) {
         super("Unknown var: " + var);
     }
 }

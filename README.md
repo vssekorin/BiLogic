@@ -1,12 +1,56 @@
 **BiLogic** is programming language (esoteric) for JVM. All variables are boolean.
 
+## Methods
+
+```
+def name
+    body
+end def
+```
+
+```
+<VarListWithEmpty> invoke name <Arguments>
+
+VarListWithEmpty := varname, <VarList> | varname | _
+Arguments := true <Arguments> | false <Arguments> |
+    varname <Arguments> | true | false | varname 
+```
+
+Main method:
+```
+def main
+    ...
+end def
+```
+
+Example
+```
+def main
+    res1, res2 invoke method1
+    res3, _, res4 invoke method2 false res1
+end def
+
+def method1
+    in var1, var2
+    ret var2
+    var3 is var1 -> var2
+    ret var3
+end def
+
+def method2 arg1 arg2
+    ret arg1 and arg2
+    ret arg1 or arg2
+    ret arg1 -> arg2
+end def
+```
+
 ## Assignment
 
 Operations:
 - `not`
 - `or`
 - `and`
-- `->` (implication)
+- `->`
 ```
 Assignment := <VarList> is <Expression>
 VarList := varname, <VarList> | varname

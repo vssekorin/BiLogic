@@ -45,12 +45,14 @@ public final class Is implements Code {
     public ChainInsnList asBytecode() {
         val code = new ChainInsnList();
         val words = this.line.split(new FramedString(Is.NAME).text());
-        val varsIndex = new VarList(this.info, words[0]).asIndexList();
         val expression = new SomeExpression(this.info, words[1]);
-        for (final int index : varsIndex) {
-            code.add(expression.asBytecode());
-            code.add(new VarInsnNode(ISTORE, index));
-        }
+        new VarList(this.info, words[0])
+            .asIndexStream()
+            .mapToObj(i -> new VarInsnNode(ISTORE, i))
+            .forEach(node -> code
+                .add(expression.asBytecode())
+                .add(node)
+            );
         return code;
     }
 }

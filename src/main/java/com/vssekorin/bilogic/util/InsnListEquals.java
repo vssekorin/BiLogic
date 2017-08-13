@@ -40,7 +40,8 @@ public final class InsnListEquals {
      */
     public InsnListEquals(
         final ChainInsnList first,
-        final ChainInsnList second) {
+        final ChainInsnList second
+    ) {
         this(first.getInsnList(), second.getInsnList());
     }
 

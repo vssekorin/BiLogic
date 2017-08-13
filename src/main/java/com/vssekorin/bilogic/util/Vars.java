@@ -5,7 +5,7 @@
  */
 package com.vssekorin.bilogic.util;
 
-import com.vssekorin.bilogic.error.UnknownVariable;
+import com.vssekorin.bilogic.error.UnknownVariableException;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -69,7 +69,7 @@ public final class Vars {
         if (var.equals(Vars.IGNORED)) {
             result = -1;
         } else if (!this.list.contains(var)) {
-            throw new UnknownVariable(var);
+            throw new UnknownVariableException(var);
         } else {
             result = this.list.indexOf(var);
         }

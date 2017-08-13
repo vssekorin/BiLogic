@@ -5,7 +5,8 @@
  */
 package com.vssekorin.bilogic.code;
 
-import com.vssekorin.bilogic.error.IncorrectLine;
+import com.vssekorin.bilogic.error.IncorrectLineException;
+import com.vssekorin.bilogic.method.MainMethod;
 import com.vssekorin.bilogic.method.MethodInfo;
 import com.vssekorin.bilogic.util.ChainInsnList;
 import lombok.AllArgsConstructor;
@@ -49,12 +50,13 @@ public final class BLCodeLine implements Code {
                 case While.NAME: code = new While(this.info, this.line); break;
                 case End.NAME: code = new End(this.info, this.line); break;
                 case Ret.NAME:
-                    code = new RelevantRet(
+                    code = new RelevantCode(
                         this.info,
-                        new Ret(this.info, this.line)
+                        new Ret(this.info, this.line),
+                        MainMethod.NAME
                     );
                     break;
-                default: throw new IncorrectLine(line);
+                default: throw new IncorrectLineException(this.line);
             }
         }
         return code.asBytecode();

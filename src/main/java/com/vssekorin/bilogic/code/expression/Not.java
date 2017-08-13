@@ -38,13 +38,13 @@ public final class Not implements Expression {
     /**
      * Ctor.
      *
-     * @param information The information
+     * @param info The information
      * @param string Expression text
      */
-    public Not(final MethodInfo information, final String string) {
+    public Not(final MethodInfo info, final String string) {
         this(
             new SimpleExpression(
-                information,
+                info,
                 string.substring(Not.NAME.length()).trim()
             )
         );

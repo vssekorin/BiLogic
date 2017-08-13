@@ -46,9 +46,7 @@ public final class BLCode {
         String header = "";
         for (final String line : this.pureCode()) {
             if (line.startsWith(SomeMethod.NAME + " ")) {
-                header = line
-                    .substring(SomeMethod.NAME.length())
-                    .trim();
+                header = line.substring(SomeMethod.NAME.length()).trim();
                 methods.put(header, new ArrayList<>());
             } else {
                 val body = methods.get(header);
