@@ -9,6 +9,7 @@ import com.vssekorin.bilogic.method.MethodInfo;
 import com.vssekorin.bilogic.util.ChainInsnList;
 import com.vssekorin.bilogic.util.CustomObject;
 import com.vssekorin.bilogic.util.VarList;
+import com.vssekorin.bilogic.util.Vars;
 import jdk.internal.org.objectweb.asm.tree.FieldInsnNode;
 import jdk.internal.org.objectweb.asm.tree.VarInsnNode;
 import lombok.AllArgsConstructor;
@@ -57,6 +58,7 @@ public final class In implements Code {
         val vars = this.line.substring(In.NAME.length()).trim();
         new VarList(this.info, vars)
             .asIndexStream()
+            .filter(i -> i != Vars.IGNORED)
             .mapToObj(i -> new VarInsnNode(ISTORE, i))
             .forEach(node -> code
                 .add(new VarInsnNode(ALOAD, this.info.vars().index(In.NAME)))

@@ -59,10 +59,10 @@ public final class And implements Expression {
         val code = new ChainInsnList();
         val ifeq = new LabelNode();
         val end = new LabelNode();
-        for (final Expression exp : this.list) {
-            code.add(exp.asBytecode())
-                .add(new JumpInsnNode(IFEQ, ifeq));
-        }
+        this.list.stream()
+            .map(Expression::asBytecode)
+            .map(item -> item.add(new JumpInsnNode(IFEQ, ifeq)))
+            .forEach(code::add);
         code.add(new Result(ifeq, end).asBytecode());
         return code;
     }

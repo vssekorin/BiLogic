@@ -10,6 +10,7 @@ import com.vssekorin.bilogic.method.MethodInfo;
 import com.vssekorin.bilogic.util.ChainInsnList;
 import com.vssekorin.bilogic.util.FramedString;
 import com.vssekorin.bilogic.util.VarList;
+import com.vssekorin.bilogic.util.Vars;
 import jdk.internal.org.objectweb.asm.tree.VarInsnNode;
 import lombok.AllArgsConstructor;
 import lombok.val;
@@ -48,6 +49,7 @@ public final class Is implements Code {
         val expression = new SomeExpression(this.info, words[1]);
         new VarList(this.info, words[0])
             .asIndexStream()
+            .filter(i -> i != Vars.IGNORED)
             .mapToObj(i -> new VarInsnNode(ISTORE, i))
             .forEach(node -> code
                 .add(expression.asBytecode())

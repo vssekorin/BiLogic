@@ -1,4 +1,4 @@
-**BiLogic** is programming language (esoteric) for JVM. All variables are boolean.
+**BiLogic** (BivalentLogic) is programming language (esoteric) for JVM. All variables are boolean.
 
 ## Methods
 
@@ -9,9 +9,9 @@ end def
 ```
 
 ```
-<VarListWithEmpty> invoke name <Arguments>
+<VarList> invoke name <Arguments>
 
-VarListWithEmpty := varname, <VarList> | varname | _
+VarList := varname, <VarList> | _, <VarList> | varname | _
 Arguments := true <Arguments> | false <Arguments> |
     varname <Arguments> | true | false | varname 
 ```
@@ -53,7 +53,6 @@ Operations:
 - `->`
 ```
 Assignment := <VarList> is <Expression>
-VarList := varname, <VarList> | varname
 Expression := true | false | varname | not <Expression>
         <Expression> <BOperation> <Expression>
 BOperation := and | or | ->

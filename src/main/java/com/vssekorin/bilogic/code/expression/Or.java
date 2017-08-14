@@ -77,10 +77,9 @@ public final class Or implements Expression {
         val indexLast = this.list.size() - 1;
         this.list.stream()
             .limit(indexLast)
-            .forEach(exp -> code
-                .add(exp.asBytecode())
-                .add(new JumpInsnNode(IFNE, ifne))
-            );
+            .map(Expression::asBytecode)
+            .map(item -> item.add(new JumpInsnNode(IFNE, ifne)))
+            .forEach(code::add);
         return code
             .add(this.list.get(indexLast).asBytecode())
             .add(new JumpInsnNode(IFEQ, ifeq))

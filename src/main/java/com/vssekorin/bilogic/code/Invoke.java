@@ -11,6 +11,7 @@ import com.vssekorin.bilogic.method.MethodInfo;
 import com.vssekorin.bilogic.util.ChainInsnList;
 import com.vssekorin.bilogic.util.FramedString;
 import com.vssekorin.bilogic.util.VarList;
+import com.vssekorin.bilogic.util.Vars;
 import jdk.internal.org.objectweb.asm.tree.MethodInsnNode;
 import jdk.internal.org.objectweb.asm.tree.VarInsnNode;
 import lombok.AllArgsConstructor;
@@ -70,7 +71,7 @@ public final class Invoke implements Code {
             .add(new VarInsnNode(ASTORE, invokeIndex));
         for (int i = 0; i < varsIndex.size(); i++) {
             val index = varsIndex.get(i);
-            if (index != -1) {
+            if (index != Vars.IGNORED) {
                 code.add(new RetValue(invokeIndex, i).asBytecode())
                     .add(new VarInsnNode(ISTORE, index));
             }

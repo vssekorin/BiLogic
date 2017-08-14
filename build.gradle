@@ -1,7 +1,23 @@
-group 'VsLang'
-version '1.0-SNAPSHOT'
+plugins {
+    id 'java'
+}
 
-apply plugin: 'java'
+group 'VsLang'
+version 'v.1.0'
+
+compileJava {
+    options.fork = true
+    options.forkOptions.executable = 'javac'
+    options.compilerArgs << "-XDignore.symbol.file"
+}
+
+jar {
+    manifest {
+        attributes(
+                'Main-Class': 'com.vssekorin.bilogic.Main'
+        )
+    }
+}
 
 sourceCompatibility = 1.8
 

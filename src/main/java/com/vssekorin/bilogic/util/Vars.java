@@ -23,7 +23,12 @@ public final class Vars {
     /**
      * Ignore variable.
      */
-    private static final String IGNORED = "_";
+    private static final String IGNORED_VAR = "_";
+
+    /**
+     * Index of ignore variable.
+     */
+    public static final int IGNORED = -1;
 
     /**
      * List of variables name.
@@ -53,7 +58,7 @@ public final class Vars {
      * @param var Variable name
      */
     public void add(final String var) {
-        if (!var.equals(Vars.IGNORED) && !this.list.contains(var)) {
+        if (!var.equals(IGNORED_VAR) && !this.list.contains(var)) {
             this.list.add(var);
         }
     }
@@ -66,12 +71,12 @@ public final class Vars {
      */
     public int index(final String var) {
         final int result;
-        if (var.equals(Vars.IGNORED)) {
-            result = -1;
-        } else if (!this.list.contains(var)) {
-            throw new UnknownVariableException(var);
-        } else {
+        if (var.equals(IGNORED_VAR)) {
+            result = IGNORED;
+        } else if (this.list.contains(var)) {
             result = this.list.indexOf(var);
+        } else {
+            throw new UnknownVariableException(var);
         }
         return result;
     }
