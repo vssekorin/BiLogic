@@ -12,7 +12,7 @@ import lombok.experimental.Accessors;
 /**
  * The pair.
  *
- * @author VsSekorin
+ * @author Vseslav Sekorin (vssekorin@gmail.com)
  * @version $Id$
  * @param <T> Type of elements.
  * @since 1.0

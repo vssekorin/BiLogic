@@ -50,7 +50,7 @@ public final class VarList {
      * @return Stream of indexes
      */
     public IntStream asIndexStream() {
-        return Arrays.stream(string.split(",\\s+"))
+        return Arrays.stream(this.string.split(",\\s+"))
             .peek(this.info.vars()::add)
             .map(this.info.vars()::index)
             .mapToInt(Integer::intValue);
