@@ -55,7 +55,7 @@ Operations:
 Assignment := <VarList> is <Expression>
 Expression := true | false | varname | not <Expression>
         <Expression> <BOperation> <Expression>
-BOperation := and | or | ->
+BOperation := and | or | -> | xor
 ```
 Examples:
 ```
