@@ -27,7 +27,7 @@ Example
 ```
 def main
     res1, res2 invoke method1
-    res3, _, res4 invoke method2 false res1
+    res3, _, res4, res5 invoke method2 false res1
 end def
 
 def method1
@@ -40,6 +40,7 @@ end def
 def method2 arg1 arg2
     ret arg1 and arg2
     ret arg1 or arg2
+    ret arg1 xor arg2
     ret arg1 -> arg2
 end def
 ```
@@ -50,12 +51,13 @@ Operations:
 - `not`
 - `or`
 - `and`
+- `xor`
 - `->`
 ```
 Assignment := <VarList> is <Expression>
 Expression := true | false | varname | not <Expression>
         <Expression> <BOperation> <Expression>
-BOperation := and | or | -> | xor
+BOperation := and | or | xor | ->
 ```
 Examples:
 ```
