@@ -23,10 +23,10 @@ import static org.junit.Assert.assertTrue;
  */
 public class CustomObjectTest {
 
-    private final String name = "java/util/ArrayList";
+    private final static String name = "java/util/ArrayList";
 
     private final CustomObject object =
-        new CustomObject(this.name);
+        new CustomObject(name);
 
     @Test
     public void codeNew() throws Exception {
@@ -34,7 +34,7 @@ public class CustomObjectTest {
             new InsnListEquals(
                 this.object.codeNew(),
                 new ChainInsnList()
-                    .add(new TypeInsnNode(NEW, this.name))
+                    .add(new TypeInsnNode(NEW, name))
                     .add(new InsnNode(DUP))
             ).value()
         );
@@ -49,7 +49,7 @@ public class CustomObjectTest {
                 new ChainInsnList()
                     .add(new MethodInsnNode(
                         INVOKESPECIAL,
-                        this.name,
+                        name,
                         "<init>",
                         types,
                         false

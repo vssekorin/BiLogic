@@ -5,6 +5,8 @@
  */
 package com.vssekorin.bilogic;
 
+import java.nio.file.Path;
+
 /**
  * Java class.
  *
@@ -16,6 +18,8 @@ public interface JavaClass {
 
     /**
      * Save file.
+     *
+     * @return Path
      */
-    void save();
+    Path save();
 }

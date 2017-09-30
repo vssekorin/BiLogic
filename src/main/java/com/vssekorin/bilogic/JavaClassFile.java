@@ -39,12 +39,12 @@ public final class JavaClassFile implements JavaClass {
     private final List<MethodNode> methods;
 
     @Override @SneakyThrows
-    public void save() {
+    public Path save() {
         ClassNode classNode = new ClassNode();
         this.header(classNode).methods.addAll(this.methods);
         ClassWriter writer = new ClassWriter(ClassWriter.COMPUTE_FRAMES);
         classNode.accept(writer);
-        Files.write(Paths.get(this.newPath()), writer.toByteArray());
+        return Files.write(Paths.get(this.newPath()), writer.toByteArray());
     }
 
     /**

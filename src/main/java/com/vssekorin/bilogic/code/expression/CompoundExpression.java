@@ -38,6 +38,7 @@ public final class CompoundExpression implements Expression {
      */
     private static final List<String> OPERATIONS = Arrays.asList(
         " " + Implication.NAME + " ",
+        " " + Xor.NAME + " ",
         " " + Or.NAME + " ",
         " " + And.NAME + " ",
         Not.NAME + " "
@@ -48,9 +49,10 @@ public final class CompoundExpression implements Expression {
         final Expression expression;
         switch (this.nextOperation()) {
             case 0: expression = new Implication(this.info, this.string); break;
-            case 1: expression = new Or(this.info, this.string); break;
-            case 2: expression = new And(this.info, this.string); break;
-            case 3: expression = new Not(this.info, this.string); break;
+            case 1: expression = new Xor(this.info, this.string); break;
+            case 2: expression = new Or(this.info, this.string); break;
+            case 3: expression = new And(this.info, this.string); break;
+            case 4: expression = new Not(this.info, this.string); break;
             default: throw new IncorrectExpression(this.string);
         }
         return expression.asBytecode();
